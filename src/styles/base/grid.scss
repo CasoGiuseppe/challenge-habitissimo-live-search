@@ -1,0 +1,89 @@
+.grid {
+  width: 100%;
+  max-width: $grid__bp-xl * 1px;
+  margin: 0 auto;
+
+  @include breakpoint('large-desktop') {
+    max-width: $grid__bp-xxl * 1px;
+  }
+
+  &--isFluid {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    @include breakpoint('only-phone') {
+      flex-wrap: wrap;
+    }
+
+    &--isWrap {
+      flex-wrap: wrap;
+    }
+
+    &--start {
+      justify-content: flex-start;
+    }
+
+    &--center {
+      justify-content: center;
+    }
+
+    &--end {
+      justify-content: flex-end;
+    }
+
+    &--align-center {
+      align-items: center;
+    }
+
+    &--align-top {
+      align-items: flex-start;
+    }
+
+    &--align-bottom {
+      align-items: flex-end;
+    }
+
+    *[class*="grid__col"] {
+      display: flex;
+      align-items: center;
+
+      &[class*="--center"]{
+        justify-content: center;
+      }
+
+      &[class*="--end"]{
+        justify-content: flex-end;
+      }
+
+      &[class*="--between"]{
+        justify-content: space-between;
+      }
+
+      &[class*="--column"]{
+        flex-direction: column;
+      }
+
+      &[class*="--align-start"]{
+        align-items: flex-start;
+      }
+
+      &[class*="--align-end"]{
+        align-items: flex-end;
+      }
+
+      &[class*="--align-center"]{
+        align-items: center;
+      }
+    }
+  }
+
+  @each $modifier , $breakpoint in $map-grid-props {
+    @include build-col-classes($modifier, $grid__cols, $breakpoint);
+  }
+}

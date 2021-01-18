@@ -1,5 +1,6 @@
 <template>
   <main id="app">
-    main content
+    Habitissimo
   </main>
 </template>
+<style lang="scss" src="@/styles/index.scss" />

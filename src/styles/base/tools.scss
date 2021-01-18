@@ -1,0 +1,114 @@
+//- CUSTOM FUNTIONS:
+//- convert px to rem
+$browser-context: 16;
+@function px2rem($pixels, $context: $browser-context) {
+  @return ($pixels / $context) * 1rem;
+}
+
+//- CUSTOM MIXINS:
+//- typography mixins
+@mixin text--light {
+  font-family: $Montserrat, sans-serif;
+  font-weight: $light;
+}
+
+@mixin text--regular {
+  font-family: $Montserrat, sans-serif;
+  font-weight: $regular;
+}
+
+@mixin text--bold {
+  font-family: $Montserrat, sans-serif;
+  font-weight: $bold;
+}
+
+@mixin text--medium {
+  font-size: px2rem(16);
+}
+
+@mixin text--small {
+  font-size: px2rem(14);
+}
+
+@mixin text--xsmall {
+  font-size: px2rem(12);
+}
+
+//- generate breakpoints
+//- @param breakpoint {string} :
+//- only-phone = from 0 to 576 {mobile}
+//- tablet-pt = from 768 {tablet portrait}
+//- tablet-ld = from 992 {tablet landscape}
+//- desktop = from 1140 {desktop}
+@mixin breakpoint($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media #{inspect(map-get($breakpoints, $breakpoint))} {
+      @content;
+    }
+  }
+ 
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+//- generate grid
+//- create media queries for columns use
+@mixin build-mq($breakpoint, $min-or-max) {
+  @if($breakpoint == 0) {
+    @content;
+  } @else {
+    @media screen and (#{$min-or-max}-width: $breakpoint *1px) {
+      @content;
+    }
+  }
+}
+
+//- grid create column class
+@mixin build-col-classes($modifier, $grid-cols, $breakpoint) {
+  @include build-mq($breakpoint, 'min') {
+    &__col#{$modifier}-offset-0 {
+      margin-left: 0;
+    }
+    @for $i from 1 through $grid-cols {
+      &__col#{$modifier}-#{$i} {
+        @if $i != 12 {
+          flex: 0 0 calc((100 / #{$grid-cols / $i} * 1%));
+          @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+            flex-basis: calc((100% / #{$grid-cols / $i}));
+         }
+        } @else {
+          flex: 0 0 calc((100 / #{$grid-cols / $i} * 1%));
+          @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+            flex-basis: calc((100% / #{$grid-cols / $i}));
+         }
+        }
+      }
+
+      &__col#{$modifier}-offset-right-#{$i} {
+        margin-right: (100 / ($grid-cols / $i) ) * 1%;
+      }
+
+      &__col#{$modifier}-offset-left-#{$i} {
+        margin-left: (100 / ($grid-cols / $i) ) * 1%;
+      }
+    }
+  }
+}
+
+@each $modifier , $breakpoint in $map-grid-props {
+  @if($modifier == '') {
+    $modifier: '-xs';
+  }
+  @include build-mq($breakpoint - 1, 'max') {
+    .hidden#{$modifier}-down {
+      display: none !important;
+    }
+  }
+  @include build-mq($breakpoint, 'min') {
+    .hidden#{$modifier}-up {
+      display: none !important;
+    }
+  }
+}

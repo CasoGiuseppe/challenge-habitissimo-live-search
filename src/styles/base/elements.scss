@@ -1,0 +1,46 @@
+::placeholder {
+  @include text--light;
+  @include text--xsmall;
+  color: rgba($c-gray-300, .7);
+}
+
+::-ms-input-placeholder {
+  @include text--light;
+  @include text--xsmall;
+  color: rgba($c-gray-300, .7);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+input,
+button,
+select,
+fieldset {
+  padding: 0;
+  margin: 0;
+  
+  background: none;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul, ol, li, h1, h2, h3, h4, figure, button, p, form, thead, td, tr, tbody, table {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+figure {
+  img {
+    max-width: 100%;
+  }
+}
