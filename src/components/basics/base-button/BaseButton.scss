@@ -44,6 +44,16 @@
 		}
 	}
 
+	&--is-squared {
+		display: flex;
+		flex: 0 0 100%;
+		height: 100%;
+		padding: 0;
+		width: 100%;
+
+		border-radius: 0;
+	}
+
 	&__content {
 		align-items: center;
 		display: flex;

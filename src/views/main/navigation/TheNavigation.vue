@@ -26,15 +26,54 @@
 
         <!-- LIVE SEARCH + BTN-->
         <li class="
+          the-navigation__search
           grid__col-xs-12
           grid__col-sm-6
           grid__col--end
         ">
-          right
+          live search
+          <!-- <span class="the-navigation__mobile-trigger">
+            <BaseButton is-squared>
+              <template #content>
+                <BaseIcon
+                  :name="$icons.bill"
+                  size="normal"
+                  color="light"
+                />
+              </template>
+            </BaseButton>
+          </span> -->
+        </li>
+        <!-- /// -->
+
+        <!-- MOBILE BTN TRIGGER -->
+        <li
+          v-if="$mq === 'mobile'"
+          class="the-navigation__mobile-trigger"
+        >
+          <BaseButton is-squared>
+              <template #content>
+                <BaseIcon
+                  :name="$icons.hamburger"
+                  size="normal"
+                  color="light"
+                />
+              </template>
+            </BaseButton>
         </li>
         <!-- /// -->
       </ul>
     </section>
   </nav>
 </template>
+<script>
+export default {
+  name: 'TheNavigation',
+
+  components: {
+    BaseButton: () => import(/* webpackChunkName: "BaseButton" */ '@/components/basics/base-button/BaseButton'),
+    BaseIcon: () => import(/* webpackChunkName: "BaseIcon" */ '@/components/basics/base-icon/BaseIcon'),
+  },
+};
+</script>
 <style lang="scss" src="./TheNavigation.scss" />

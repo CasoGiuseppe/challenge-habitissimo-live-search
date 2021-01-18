@@ -22,9 +22,34 @@
     li {
       + li {
         @include breakpoint('only-phone') {
-          margin-top: px2rem($base * 3);
+          &:not(#{$thenavigation}__mobile-trigger) {
+            margin-top: px2rem($base * 3);
+          }
         }
       }
     }
+  }
+
+  &__search {
+    background: red;
+
+    @include breakpoint('only-phone') {
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      width: 100%;
+
+      transform: translateY(100%);
+    }
+  }
+
+  &__mobile-trigger {
+    display: flex;
+    height: px2rem($base * 8);
+    margin-top: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: px2rem($base * 8);
   }
 }
