@@ -1,0 +1,30 @@
+.the-navigation {
+  $thenavigation: &;
+
+  width: 100%;
+
+  &__logo {
+    img {
+      max-width: px2rem(120);
+      transition: max-width .4s $a-ease-out;
+
+      @include breakpoint('only-phone') {
+        max-width: px2rem(120);
+      }
+
+      @include breakpoint('tablet-pt') {
+        max-width: px2rem(150);
+      }
+    }
+  }
+
+  &__content {
+    li {
+      + li {
+        @include breakpoint('only-phone') {
+          margin-top: px2rem($base * 3);
+        }
+      }
+    }
+  }
+}

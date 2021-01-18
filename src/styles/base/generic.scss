@@ -27,6 +27,36 @@ body,
 	margin: 0;
 }
 
-#app {
+.app {
+  align-items: center;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__header,
+  &__main,
+  &__footer {
+    padding: 0 px2rem($base * 2);
+    width: 100%;
+  }
+
+  &__header {
+    align-items: center;
+    flex: 0 0 px2rem($base * 12);
+    display: flex;
+    position: sticky;
+    top: 0;
+
+    border-bottom: 1px solid $c-gray-300;
+    box-shadow: 0px px2rem($base - 2) px2rem($base) 0px rgba(0,0,0,0.1);
+  }
+
+  &__main {
+    flex: 2;
+    background: $c-core-blue;
+  }
+
+  &__footer {
+    border-top: 1px solid $c-gray-300;
+  }
 }

@@ -1,0 +1,66 @@
+.base-icon {
+  --backgound: '#000';
+
+  $baseicon: &;
+
+  fill: currentColor;
+  background: var(--backgound);
+  
+  &--is {
+    &-default {
+      flex: 0 0 80%;
+      height: inherit;
+      width: 80%;
+    }
+
+    &-xxlarge {
+      flex: 0 0 6em;
+      height: 6em;
+      width: 6em;
+    }
+
+    &-xlarge {
+      flex: 0 0 4em;
+      height: 4em;
+      width: 4em;
+    }
+
+    &-large {
+      flex: 0 0 2em;
+      height: 2em;
+      width: 2em;
+    }
+
+    &-medium {
+      flex: 0 0 1.6em;
+      height: 1.6em;
+      width: 1.6em;
+    }
+
+    &-normal {
+      flex: 0 0 1.2em;
+      height: 1.2em;
+      width: 1.2em;
+    }
+
+    &-small {
+      flex: 0 0 1em;
+      height: 1em;
+      width: 1em;
+    }
+
+    &-xsmall {
+      flex: 0 0 0.8em;
+      height: 0.8em;
+      width: 0.8em;
+    }
+
+    &-primary {
+      fill: $c-core-orange
+    }
+    
+    &-light {
+      fill: $c-white
+    }
+  }
+}

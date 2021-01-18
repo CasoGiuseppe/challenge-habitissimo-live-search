@@ -1,0 +1,72 @@
+.base-button {
+	@include text--regular;
+	@include text--small;
+	@include move(
+    $name: 'button-label',
+    $from: translateY(50%),
+    $to: translateY(-50%),
+    $duration: .4s
+	);
+	
+	$basebutton: &;
+	
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	padding: px2rem($base * 2) px2rem($base * 4);
+	overflow: hidden;
+
+	border-radius: px2rem($base * 4);
+	color: $c-white;
+	text-decoration: none;
+
+	transition: background .4s $a-ease-out,
+							color .4s $a-ease-out,
+							opacity .4s $a-ease-out;
+	
+	@include breakpoint('only-phone') {
+		padding: px2rem($base * 2);
+	}
+	
+	* {
+		pointer-events: none;
+	}
+	
+	&--is-primary {
+		background-color: $c-core-orange;
+
+		@include breakpoint('tablet-ld') {
+			&:hover {
+				&:not(:disabled) {
+						background-color: rgba($c-core-orange, .7);
+				}
+			}
+		}
+	}
+
+	&__content {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+
+		::v-deep {
+			.base-icon {
+				margin: 0 0 0 px2rem($base);
+			}
+		}
+
+		#{$basebutton}--is-rounded & {
+			::v-deep {
+				.base-icon {
+					margin: 0  px2rem($base);
+				}
+			}
+		}
+	}
+
+	&:disabled {
+		background-color: darken($c-gray-300, 1.2);
+		cursor: default;
+	}
+}

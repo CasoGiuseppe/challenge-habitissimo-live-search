@@ -34,6 +34,44 @@ $browser-context: 16;
   font-size: px2rem(12);
 }
 
+//- animations
+//- animations
+@mixin move(
+  $name: 'slide',
+  $init: translateY(0) translateX(0),
+  $from: translateX(100%),
+  $to: translateX(100%),
+  $duration: .4s,
+  $delay: 0s,
+) {
+  .#{$name}-leave,
+  .#{$name}-enter-to {
+    opacity: 1;
+    transform: $init
+  }
+
+  .#{$name}-leave-active,
+  .#{$name}-enter-active {
+    transition: transform $duration $a-ease-out $delay,
+                opacity $duration $a-ease-out $delay;
+  }
+
+  .#{$name}-leave-active {
+    transition-duration: .3s;
+    transition-timing-function: $a-ease-out
+  }
+
+  .#{$name}-leave-to {
+    opacity: 0;
+    transform: $to;
+  }
+
+  .#{$name}-enter {
+    opacity: 0;
+    transform: $from
+  }
+}
+
 //- generate breakpoints
 //- @param breakpoint {string} :
 //- only-phone = from 0 to 576 {mobile}

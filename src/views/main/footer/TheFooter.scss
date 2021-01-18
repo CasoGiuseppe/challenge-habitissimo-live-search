@@ -1,0 +1,42 @@
+.the-footer {
+  $thefooter: &;
+
+  padding: px2rem($base * 2) 0;
+
+  &__copy {
+    @include text--bold;
+    @include text--xsmall;
+
+    width: 100%;
+    color: $c-black;
+    text-align: right;
+
+    @include breakpoint('only-phone') {
+      text-align: center
+    }
+
+    span {
+      @include text--light;
+    }
+  }
+
+  &__content {
+    li {
+      @include breakpoint('only-phone') {
+        justify-content: center;
+      }
+
+      + li {
+        @include breakpoint('only-phone') {
+          margin-top: px2rem($base * 3);
+        }
+      }
+
+      .base-button {
+        @include breakpoint('only-phone') {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
