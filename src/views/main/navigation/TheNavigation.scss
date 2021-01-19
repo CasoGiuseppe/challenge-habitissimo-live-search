@@ -1,6 +1,9 @@
 .the-navigation {
-  $thenavigation: &;
+  @include expand(
+    $duration: .4s
+  );
 
+  $thenavigation: &;
   width: 100%;
 
   &__logo {
@@ -31,7 +34,7 @@
   }
 
   &__search {
-    background: red;
+    overflow: hidden;
 
     @include breakpoint('only-phone') {
       bottom: 0;
@@ -39,6 +42,7 @@
       position: absolute;
       width: 100%;
 
+      background: $c-gray-300;
       transform: translateY(100%);
     }
   }

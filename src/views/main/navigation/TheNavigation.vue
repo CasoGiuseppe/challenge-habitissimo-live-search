@@ -25,25 +25,25 @@
         <!-- /// -->
 
         <!-- LIVE SEARCH + BTN-->
-        <li class="
-          the-navigation__search
-          grid__col-xs-12
-          grid__col-sm-6
-          grid__col--end
-        ">
-          live search
-          <!-- <span class="the-navigation__mobile-trigger">
-            <BaseButton is-squared>
-              <template #content>
-                <BaseIcon
-                  :name="$icons.bill"
-                  size="normal"
-                  color="light"
-                />
-              </template>
-            </BaseButton>
-          </span> -->
-        </li>
+        <transition
+          name="expand"
+          appear
+          @before-enter="beforePanelEnter"
+          @before-leave="panelLeave"
+        >
+          <li
+            v-if="extraPanel"
+            class="
+              the-navigation__search
+              grid__col-xs-12
+              grid__col-sm-6
+              grid__col--end
+          ">
+            <div>
+              live search
+            </div>
+          </li>
+        </transition>
         <!-- /// -->
 
         <!-- MOBILE BTN TRIGGER -->
@@ -51,7 +51,10 @@
           v-if="$mq === 'mobile'"
           class="the-navigation__mobile-trigger"
         >
-          <BaseButton is-squared>
+          <BaseButton
+            is-squared
+            @click="changeExtraPanel"
+          >
               <template #content>
                 <BaseIcon
                   :name="$icons.hamburger"
@@ -67,12 +70,50 @@
   </nav>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'TheNavigation',
 
   components: {
     BaseButton: () => import(/* webpackChunkName: "BaseButton" */ '@/components/basics/base-button/BaseButton'),
     BaseIcon: () => import(/* webpackChunkName: "BaseIcon" */ '@/components/basics/base-icon/BaseIcon'),
+  },
+
+  computed: {
+    ...mapGetters('cosmetic', [
+      'getExtraPanelState',
+    ]),
+
+    extraPanel() {
+      return (this.$mq === 'mobile' && this.getExtraPanelState) || (this.$mq === 'tablet');
+    },
+  },
+
+  methods: {
+    ...mapActions('cosmetic', [
+      'changeExtraPanelState',
+    ]),
+
+    changeExtraPanel() {
+      this.changeExtraPanelState({
+        value: !this.getExtraPanelState,
+      });
+    },
+
+    beforePanelEnter(e) {
+      e.style.height = `${e.firstChild.clientHeight}px`;
+      requestAnimationFrame(() => {
+        e.style.height = `${e.firstChild.clientHeight}px`;
+      });
+    },
+
+    panelLeave(e) {
+      e.style.height = `${e.firstChild.clientHeight}px`;
+      requestAnimationFrame(() => {
+        e.style.height = 0;
+      });
+    },
   },
 };
 </script>

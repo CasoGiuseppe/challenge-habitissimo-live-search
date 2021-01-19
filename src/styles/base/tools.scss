@@ -72,6 +72,31 @@ $browser-context: 16;
   }
 }
 
+@mixin expand(
+  $duration: .6s
+) {
+  .expand-enter-active,
+  .expand-leave-active {
+    overflow: hidden;
+    opacity: 1;
+
+    transition: height $duration $a-ease-out,
+                opacity $duration $a-ease-out,
+  }
+
+  .expand-leave-active {
+    transition-duration: .3s;
+    transition-timing-function: $a-ease-in
+  }
+
+  .expand-enter,
+  .expand-leave-to {
+    width: 0;
+    opacity: 0;
+    flex: 0
+  }
+}
+
 //- generate breakpoints
 //- @param breakpoint {string} :
 //- only-phone = from 0 to 576 {mobile}

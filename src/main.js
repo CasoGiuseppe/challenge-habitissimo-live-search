@@ -16,7 +16,7 @@ Vue.prototype.$icons = icons; // this.$icons
 Vue.use(VueMq, {
   breakpoints: {
     mobile: 600,
-    desktop: Infinity,
+    tablet: Infinity,
   },
 });
 
