@@ -9,7 +9,7 @@
         <!-- LOGO -->
         <li class="
           grid__col-xs-12
-          grid__col-sm-6
+          grid__col-sm-8
         ">
           <h1 class="the-navigation__wrap">
             <a href="/">
@@ -25,25 +25,27 @@
         <!-- /// -->
 
         <!-- LIVE SEARCH + BTN-->
-        <transition
-          name="expand"
-          appear
-          @before-enter="beforePanelEnter"
-          @before-leave="panelLeave"
-        >
-          <li
-            v-if="extraPanel"
-            class="
-              the-navigation__search
-              grid__col-xs-12
-              grid__col-sm-6
-              grid__col--end
-          ">
-            <div>
-              live search
-            </div>
-          </li>
-        </transition>
+        <li
+          v-if="extraPanel"
+          class="
+            the-navigation__search
+            grid__col-xs-12
+            grid__col-sm-4
+            grid__col--end
+        ">
+          <BaseInput
+            id="live-search"
+            placeholder="Qué necesitas..."
+          >
+            <template #icon>
+              <BaseIcon
+                :name="$icons.search"
+                size="medium"
+                color="dark-gray"
+              />
+            </template>
+          </BaseInput>
+        </li>
         <!-- /// -->
 
         <!-- MOBILE BTN TRIGGER -->
@@ -78,6 +80,7 @@ export default {
   components: {
     BaseButton: () => import(/* webpackChunkName: "BaseButton" */ '@/components/basics/base-button/BaseButton'),
     BaseIcon: () => import(/* webpackChunkName: "BaseIcon" */ '@/components/basics/base-icon/BaseIcon'),
+    BaseInput: () => import(/* webpackChunkName: "BaseInput" */ '@/components/basics/base-input/BaseInput'),
   },
 
   computed: {
@@ -98,20 +101,6 @@ export default {
     changeExtraPanel() {
       this.changeExtraPanelState({
         value: !this.getExtraPanelState,
-      });
-    },
-
-    beforePanelEnter(e) {
-      e.style.height = `${e.firstChild.clientHeight}px`;
-      requestAnimationFrame(() => {
-        e.style.height = `${e.firstChild.clientHeight}px`;
-      });
-    },
-
-    panelLeave(e) {
-      e.style.height = `${e.firstChild.clientHeight}px`;
-      requestAnimationFrame(() => {
-        e.style.height = 0;
       });
     },
   },

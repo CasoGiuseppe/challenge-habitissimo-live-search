@@ -1,0 +1,77 @@
+<template>
+  <div
+    class="base-input">
+    <label
+      class="base-input__label"
+      :for="id"
+    >
+      <input
+        class="base-input__field"
+        :id="id"
+        :type="type"
+        :required="isRequired.state"
+        :placeholder="placeholder"
+        @input="handleInputState"
+      />
+
+      <!-- ICON  -->
+      <slot name="icon" />
+      <!-- /// -->
+    </label>
+
+    <!-- REQUIRED LABEL -->
+    <span
+      class="base-input__required-label"
+      v-if="isRequired.state">
+        {{isRequired.label}}
+    </span>
+    <!-- /// -->
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'BaseInput',
+
+  data() {
+    return {
+      onActive: false,
+    };
+  },
+
+  methods: {
+    handleInputState(e) {
+      this.$emit('input', e.target.value);
+    },
+  },
+
+  props: {
+    type: {
+      type: String,
+      default: 'text',
+    },
+
+    id: {
+      type: String,
+      default: 'test',
+    },
+
+    placeholder: {
+      type: String,
+      default: 'placeholder',
+    },
+
+    isRequired: {
+      type: Object,
+      default() {
+        return {
+          state: false,
+          label: 'required',
+        };
+      },
+    },
+  },
+};
+</script>
+
+<style lang='scss' scoped src= './BaseInput.scss'></style>

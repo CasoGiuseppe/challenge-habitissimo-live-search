@@ -46,12 +46,14 @@ body,
     display: flex;
     position: sticky;
     top: 0;
-
-    border-bottom: 1px solid $c-gray-300;
     box-shadow: 0px px2rem($base - 2) px2rem($base) 0px rgba(0,0,0,0.1);
 
     @include breakpoint('only-phone') {
       flex: 0 0 px2rem($base * 8);
+    }
+
+    @include breakpoint('tablet-pt') {
+      border-bottom: 1px solid $c-gray-300;
     }
   }
 

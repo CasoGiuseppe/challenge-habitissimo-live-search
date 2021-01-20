@@ -34,6 +34,10 @@ $browser-context: 16;
   font-size: px2rem(12);
 }
 
+@mixin text--xxsmall {
+  font-size: px2rem(10);
+}
+
 //- animations
 //- animations
 @mixin move(
@@ -94,6 +98,12 @@ $browser-context: 16;
     width: 0;
     opacity: 0;
     flex: 0
+  }
+}
+
+@mixin keyAnimation($name) {
+  @keyframes #{$name} {
+    @content
   }
 }
 

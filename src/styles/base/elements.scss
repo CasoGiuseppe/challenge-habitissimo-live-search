@@ -1,15 +1,3 @@
-::placeholder {
-  @include text--light;
-  @include text--xsmall;
-  color: rgba($c-gray-300, .7);
-}
-
-::-ms-input-placeholder {
-  @include text--light;
-  @include text--xsmall;
-  color: rgba($c-gray-300, .7);
-}
-
 * {
   box-sizing: border-box;
 }

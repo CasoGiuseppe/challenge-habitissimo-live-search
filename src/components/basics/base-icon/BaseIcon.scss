@@ -6,6 +6,8 @@
   fill: currentColor;
   background: var(--backgound);
   
+  transition: fill .4s $a-ease-out;
+
   &--is {
     &-default {
       flex: 0 0 80%;
@@ -61,6 +63,10 @@
     
     &-light {
       fill: $c-white
+    }
+
+    &-dark-gray {
+      fill: $c-gray-700
     }
   }
 }
