@@ -16,6 +16,7 @@
     background: $c-white;
     border: 1px solid $c-gray-300;
     border-radius: px2rem($base);
+    z-index: 1;
     
     transition: border .4s $a-ease-out,
                 background .4s $a-ease-out;
@@ -60,6 +61,22 @@
 
     transition: color .4s $a-ease-out
   }
+
+  // DATA LIST RESULTS
+  &__results {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+
+    background: $c-white;
+    border: 1px solid $c-gray-300;
+    border-bottom-left-radius: px2rem($base - 1);
+    border-bottom-right-radius: px2rem($base - 1);
+    z-index: 0;
+
+    transform: translateY(100%) translateY(-3px)
+  }
+  // --
 
   &__required-label {
     @include text--xxsmall;

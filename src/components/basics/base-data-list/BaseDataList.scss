@@ -1,0 +1,60 @@
+.base-data-list {
+  --max-item-height: #{$base * 8px};
+  --max-item-length: 3;
+
+  $basedatalist: &;
+
+  max-height: calc(#{var(--max-item-height)} * #{var(--max-item-length)});
+  overflow: auto;
+
+  &__item {
+    align-items: center;
+    display: flex;
+    height: #{var(--max-item-height)};
+    padding: px2rem($base * 2) px2rem($base * 3);
+    position: relative;
+
+    cursor: pointer;
+
+    @include breakpoint('tablet-ld') {
+      &:hover {
+        &::before {
+          height: 100%;
+        }
+      }
+    }
+
+    &::before {
+      height: 0;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      width: 100%;
+
+      background: $c-gray-100;
+      content: '';
+      z-index: -1;
+
+      transition: height .6s $a-ease-out;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    &:focus {
+      &::before {
+        height: 100%;
+      }
+    }
+
+    &:not(:focus) {
+      &::before {
+        height: 0;
+      }
+    }
+  }
+
+  &--is-selected {
+    &::before {
+      height: 100%;
+    }
+  }
+}

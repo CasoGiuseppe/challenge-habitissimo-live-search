@@ -19,6 +19,15 @@
       <!-- /// -->
     </label>
 
+    <!-- DATA LIST -->
+    <aside
+      v-if="$slots['data-list']"
+      class="base-input__results"
+    >
+      <slot name="data-list" />
+    </aside>
+    <!-- /// -->
+
     <!-- REQUIRED LABEL -->
     <span
       class="base-input__required-label"

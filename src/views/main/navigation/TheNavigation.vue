@@ -37,6 +37,12 @@
             id="live-search"
             placeholder="Qué necesitas..."
           >
+            <template #data-list>
+              <BaseDataList
+                :size="6"
+                @click="test"
+              />
+            </template>
             <template #icon>
               <BaseIcon
                 :name="$icons.search"
@@ -81,6 +87,7 @@ export default {
     BaseButton: () => import(/* webpackChunkName: "BaseButton" */ '@/components/basics/base-button/BaseButton'),
     BaseIcon: () => import(/* webpackChunkName: "BaseIcon" */ '@/components/basics/base-icon/BaseIcon'),
     BaseInput: () => import(/* webpackChunkName: "BaseInput" */ '@/components/basics/base-input/BaseInput'),
+    BaseDataList: () => import(/* webpackChunkName: "BaseDataList" */ '@/components/basics/base-data-list/BaseDataList'),
   },
 
   computed: {
@@ -102,6 +109,10 @@ export default {
       this.changeExtraPanelState({
         value: !this.getExtraPanelState,
       });
+    },
+
+    test() {
+      console.log('test');
     },
   },
 };
