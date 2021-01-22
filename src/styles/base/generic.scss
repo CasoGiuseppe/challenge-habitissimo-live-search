@@ -66,3 +66,8 @@ body,
     border-top: 1px solid $c-gray-300;
   }
 }
+
+.loader {
+  height: px2rem($base * 6);
+  width: px2rem($base * 6);
+}

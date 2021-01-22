@@ -1,6 +1,12 @@
 .the-navigation {
-  @include expand(
+  @include ANM-expand(
     $duration: .4s
+  );
+  
+  @include ANM-move(
+    $name: 'loading',
+    $from: translateX(10%),
+    $to: translateX(10%)
   );
   
   $thenavigation: &;

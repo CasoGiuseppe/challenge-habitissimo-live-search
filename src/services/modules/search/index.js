@@ -11,6 +11,11 @@ export class Response {
       value: true,
     });
 
+    // set loading state
+    store.dispatch('search/changeSearchLoading', {
+      value: true,
+    });
+
     console.log('ciccio');
   }
 }

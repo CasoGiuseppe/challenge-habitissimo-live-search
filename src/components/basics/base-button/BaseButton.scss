@@ -1,7 +1,7 @@
 .base-button {
 	@include text--regular;
 	@include text--small;
-	@include move(
+	@include ANM-move(
     $name: 'button-label',
     $from: translateY(50%),
     $to: translateY(-50%),

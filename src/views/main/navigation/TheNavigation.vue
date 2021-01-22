@@ -56,12 +56,34 @@
               </transition>
             </template>
             <!-- /// -->
+
             <template #icon>
-              <BaseIcon
-                :name="$icons.search"
-                size="medium"
-                color="dark-gray"
-              />
+              <transition
+                mode="out-in"
+                name="loading"
+              >
+                <!-- icon search -->
+                <span
+                  v-if="!getSearchLoading"
+                  :key="false"
+                >
+                  <BaseIcon
+                    :name="$icons.search"
+                    size="medium"
+                    color="dark-gray"
+                  />
+                </span>
+                <!-- /// -->
+
+                <!-- loader -->
+                <img
+                  v-else
+                  :key="true"
+                  class="loader"
+                  src="@/assets/images/svg/loader.svg"
+                />
+                <!-- /// -->
+              </transition>
             </template>
           </BaseInput>
         </li>
@@ -111,6 +133,7 @@ export default {
 
     ...mapGetters('search', [
       'getSearchVisibility',
+      'getSearchLoading',
     ]),
 
     // GET EXTRA PANEL VIEW
@@ -127,6 +150,8 @@ export default {
 
     ...mapActions('search', [
       'changeSearchVisibility',
+      'changeSearchLoading',
+      'resetSearchState',
     ]),
 
     changeExtraPanel() {
@@ -137,7 +162,10 @@ export default {
 
     async startSearch(e) {
       const { length: size } = e;
-      size > 3 ? await Response.getSearchresults() : this.changeSearchVisibility({ value: false });
+
+      // START SEARCH
+      // IF KEY LENGHT > 3
+      (size > 3) ? await Response.getSearchresults() : this.resetSearchState({ value: false });
     },
 
     onExpand(e) {

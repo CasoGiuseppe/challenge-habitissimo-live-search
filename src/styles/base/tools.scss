@@ -39,7 +39,7 @@ $browser-context: 16;
 }
 
 //- animations
-@mixin move(
+@mixin ANM-move(
   $name: 'slide',
   $init: translateY(0) translateX(0),
   $from: translateX(100%),
@@ -75,7 +75,7 @@ $browser-context: 16;
   }
 }
 
-@mixin expand(
+@mixin ANM-expand(
   $duration: .6s
 ) {
   .expand-enter-active,
@@ -97,6 +97,18 @@ $browser-context: 16;
     height: 0;
     opacity: 0;
     flex: 0
+  }
+}
+
+@mixin UI-loader {
+  &::before {
+    display: block;
+    height: 24px;
+    width: 24px;
+
+    content: ' ';
+    background-image: url('/assets/images/svg/loader.svg');
+    background-size: 24px 24px;
   }
 }
 
