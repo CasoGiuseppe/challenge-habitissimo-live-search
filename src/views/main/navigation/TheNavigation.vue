@@ -3,6 +3,8 @@
     <form
       class="grid"
       autocomplete="off"
+      novalidate
+      onsubmit="event.preventDefault();"
     >
       <ul class="
         the-navigation__content
@@ -179,6 +181,8 @@ export default {
       this.changeExtraPanelState({
         value: !this.getExtraPanelState,
       });
+
+      this.stopSearch();
     },
 
     async startSearch(e) {
