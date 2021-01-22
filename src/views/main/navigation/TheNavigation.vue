@@ -53,8 +53,20 @@
                 <BaseDataList
                   v-if="getSearchVisibility"
                   :size="6"
+                  :items="[0, 1, 2, 3, 4, 5, 6, 7]"
                   @blur="focus === true ? null : stopSearch()"
-                />
+                >
+                  <!-- RESULTS -->
+                  <template
+                    slot="content"
+                    slot-scope="row"
+                  >
+                    <template v-for="(item) in row">
+                      {{ `item-${item}`}}
+                    </template>
+                  </template>
+                  <!-- /// -->
+                </BaseDataList>
               </transition>
             </template>
             <!-- /// -->

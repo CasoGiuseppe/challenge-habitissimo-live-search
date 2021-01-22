@@ -5,7 +5,7 @@
     v-click-outside="onBlur"
   >
     <li
-      v-for="(item, index) in [0, 1, 2, 3, 4, 5, 6, 7]"
+      v-for="(item, index) in items"
       :key="index"
       tabindex="0"
       :data-index="index"
@@ -15,7 +15,10 @@
       ]"
       @click="handleClickState"
     >
-      {{ `item-${index}`}}
+      <slot
+        name="content"
+        :item="item"
+      />
     </li>
   </ul>
 </template>
@@ -41,6 +44,11 @@ export default {
   },
 
   props: {
+    items: {
+      type: [Array, Object],
+      default: () => [],
+    },
+
     size: {
       type: Number,
       default: null,
