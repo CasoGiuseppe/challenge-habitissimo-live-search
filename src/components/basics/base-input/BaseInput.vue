@@ -12,6 +12,8 @@
         :required="isRequired.state"
         :placeholder="placeholder"
         @input="handleInputState"
+        @focus="handleFocusState"
+        @blur="handleBlurState"
       />
 
       <!-- ICON  -->
@@ -51,6 +53,18 @@ export default {
   methods: {
     handleInputState(e) {
       this.$emit('input', e.target.value);
+    },
+
+    handleFocusState(e) {
+      this.$emit('focus', {
+        state: true,
+      });
+    },
+
+    handleBlurState(e) {
+      this.$emit('blur', {
+        state: false,
+      });
     },
   },
 

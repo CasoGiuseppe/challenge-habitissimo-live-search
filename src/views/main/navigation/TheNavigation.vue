@@ -15,7 +15,6 @@
           grid__col-sm-8
         ">
           <h1 class="the-navigation__wrap">
-            {{ $t('message.company') }}
             <a href="/">
               <figure class="the-navigation__logo">
                 <img
@@ -39,8 +38,10 @@
         ">
           <BaseInput
             id="live-search"
-            placeholder="Qué necesitas..."
+            :placeholder="$t(`message.inputs.placeholder`)"
             @input="startSearch"
+            @focus="setFocus"
+            @blur="setFocus"
           >
             <!-- DATA LIST API RESULTS-->
             <template #data-list>
@@ -52,6 +53,7 @@
                 <BaseDataList
                   v-if="getSearchVisibility"
                   :size="6"
+                  @blur="focus === true ? null : stopSearch()"
                 />
               </transition>
             </template>
@@ -119,6 +121,12 @@ import { Response } from '@/services/modules/search';
 export default {
   name: 'TheNavigation',
 
+  data() {
+    return {
+      focus: false,
+    };
+  },
+
   components: {
     BaseButton: () => import(/* webpackChunkName: "BaseButton" */ '@/components/basics/base-button/BaseButton'),
     BaseIcon: () => import(/* webpackChunkName: "BaseIcon" */ '@/components/basics/base-icon/BaseIcon'),
@@ -155,6 +163,7 @@ export default {
     ]),
 
     changeExtraPanel() {
+      // SEARCH PANEL VISIBILITY
       this.changeExtraPanelState({
         value: !this.getExtraPanelState,
       });
@@ -165,7 +174,16 @@ export default {
 
       // START SEARCH
       // IF KEY LENGHT > 3
-      (size > 3) ? await Response.getSearchresults() : this.resetSearchState({ value: false });
+      (size > 3) ? await Response.getSearchresults() : this.stopSearch();
+    },
+
+    stopSearch() {
+      this.$nextTick(() => this.resetSearchState({ value: false }));
+    },
+
+    setFocus(e) {
+      const { state } = e;
+      this.focus = state;
     },
 
     onExpand(e) {

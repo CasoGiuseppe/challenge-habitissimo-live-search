@@ -1,6 +1,6 @@
 .the-navigation {
   @include ANM-expand(
-    $duration: .4s
+    $duration: .8s
   );
   
   @include ANM-move(

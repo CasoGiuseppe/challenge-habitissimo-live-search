@@ -6,4 +6,7 @@ export default {
     budget: 'Pide presupuesto gratis',
   },
 
+  inputs: {
+    placeholder: 'Qué necesitas...',
+  },
 };

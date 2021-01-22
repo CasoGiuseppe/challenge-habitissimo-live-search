@@ -2,6 +2,7 @@
   <ul
     class="base-data-list"
     :style="customStyle"
+    v-click-outside="onBlur"
   >
     <li
       v-for="(item, index) in [0, 1, 2, 3, 4, 5, 6, 7]"
@@ -19,8 +20,14 @@
   </ul>
 </template>
 <script>
+import ClickOutside from 'vue-click-outside';
+
 export default {
   name: 'BaseDataList',
+
+  directives: {
+    ClickOutside,
+  },
 
   data() {
     return {
@@ -64,13 +71,17 @@ export default {
     // SET FOCUS ON ARROW KEY TAP
     setFocus() {
       const current = this.$el.querySelector(`[data-index='${this.indexOf}']`);
-      current ? current.focus() : null;
+      current ? current.focus() : this.$emit('blur');
     },
 
     // EMIT CLICK EVENT
     handleClickState(e) {
       const { target: el } = e;
       this.$emit('click');
+    },
+
+    onBlur() {
+      this.$emit('blur');
     },
   },
 
