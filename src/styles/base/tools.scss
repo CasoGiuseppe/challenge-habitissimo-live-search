@@ -39,7 +39,6 @@ $browser-context: 16;
 }
 
 //- animations
-//- animations
 @mixin move(
   $name: 'slide',
   $init: translateY(0) translateX(0),
@@ -95,7 +94,7 @@ $browser-context: 16;
 
   .expand-enter,
   .expand-leave-to {
-    width: 0;
+    height: 0;
     opacity: 0;
     flex: 0
   }

@@ -1,4 +1,8 @@
 .the-navigation {
+  @include expand(
+    $duration: .4s
+  );
+  
   $thenavigation: &;
   width: 100%;
 

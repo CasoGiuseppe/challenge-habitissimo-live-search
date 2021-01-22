@@ -38,6 +38,11 @@ export default {
       type: Number,
       default: null,
     },
+
+    isVisible: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   computed: {
@@ -72,13 +77,13 @@ export default {
   // ACTIVE KEY EVENT
   mounted() {
     this.$el.addEventListener('keydown', (e) => {
-      this.keysMetohdsMap[e.keyCode] ? this.keysMetohdsMap[e.keyCode](e) : null;
+      this.keysMetohdsMap[e.keyCode] && this.keysMetohdsMap[e.keyCode](e);
     });
   },
 
   // REMOVE KEY EVENT
   destroyed() {
-    this.$el.removeEventListener('keydown');
+    this.$el.removeEventListener('keydown', (e) => {});
   },
 };
 </script>

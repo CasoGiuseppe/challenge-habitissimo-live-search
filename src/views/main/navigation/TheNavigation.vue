@@ -1,6 +1,9 @@
 <template>
   <nav class="the-navigation">
-    <section class="grid">
+    <form
+      class="grid"
+      autocomplete="off"
+    >
       <ul class="
         the-navigation__content
         grid__row
@@ -12,6 +15,7 @@
           grid__col-sm-8
         ">
           <h1 class="the-navigation__wrap">
+            {{ $t('message.company') }}
             <a href="/">
               <figure class="the-navigation__logo">
                 <img
@@ -36,13 +40,22 @@
           <BaseInput
             id="live-search"
             placeholder="Qué necesitas..."
+            @input="startSearch"
           >
+            <!-- DATA LIST API RESULTS-->
             <template #data-list>
-              <BaseDataList
-                :size="6"
-                @click="test"
-              />
+              <transition
+                name="expand"
+                @enter="onExpand"
+                @leave="onLeave"
+              >
+                <BaseDataList
+                  v-if="getSearchVisibility"
+                  :size="6"
+                />
+              </transition>
             </template>
+            <!-- /// -->
             <template #icon>
               <BaseIcon
                 :name="$icons.search"
@@ -74,11 +87,12 @@
         </li>
         <!-- /// -->
       </ul>
-    </section>
+    </form>
   </nav>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { Response } from '@/services/modules/search';
 
 export default {
   name: 'TheNavigation',
@@ -95,6 +109,12 @@ export default {
       'getExtraPanelState',
     ]),
 
+    ...mapGetters('search', [
+      'getSearchVisibility',
+    ]),
+
+    // GET EXTRA PANEL VIEW
+    // ON DEVICE MODE
     extraPanel() {
       return (this.$mq === 'mobile' && this.getExtraPanelState) || (this.$mq === 'tablet');
     },
@@ -105,14 +125,27 @@ export default {
       'changeExtraPanelState',
     ]),
 
+    ...mapActions('search', [
+      'changeSearchVisibility',
+    ]),
+
     changeExtraPanel() {
       this.changeExtraPanelState({
         value: !this.getExtraPanelState,
       });
     },
 
-    test() {
-      console.log('test');
+    async startSearch(e) {
+      const { length: size } = e;
+      size > 3 ? await Response.getSearchresults() : this.changeSearchVisibility({ value: false });
+    },
+
+    onExpand(e) {
+      requestAnimationFrame(() => { e.style.height = `${e.scrollHeight}px`; });
+    },
+
+    onLeave(e) {
+      requestAnimationFrame(() => { e.style.height = '0px'; });
     },
   },
 };

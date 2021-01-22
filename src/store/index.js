@@ -3,11 +3,13 @@ import Vuex from 'vuex';
 
 // modules
 import { cosmetic } from './modules/cosmetic/index';
+import { search } from './modules/search/index';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     cosmetic,
+    search
   },
 });
