@@ -71,3 +71,8 @@ body,
   height: px2rem($base * 6);
   width: px2rem($base * 6);
 }
+
+.highlight {
+  @include text--bold;
+  color: $c-core-blue;
+}

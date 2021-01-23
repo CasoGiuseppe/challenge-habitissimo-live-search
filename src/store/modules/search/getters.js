@@ -1,6 +1,7 @@
 export const GET_SEARCH_KEY = 'getSearchKey';
 export const GET_SEARCH_VISIBILITY = 'getSearchVisibility';
 export const GET_SEARCH_LOADING = 'getSearchLoading';
+export const GET_SEARCH_RESULTS = 'getSearchResults';
 
 export default {
   /**
@@ -20,4 +21,10 @@ export default {
    * @param state
    */
   [GET_SEARCH_LOADING]: (state) => state.loading,
+
+  /**
+   * Get search results
+   * @param state
+   */
+  [GET_SEARCH_RESULTS]: (state) => state.results,
 };

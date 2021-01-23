@@ -54,6 +54,19 @@
 		border-radius: 0;
 	}
 
+	&--is-light {
+		background: $c-white;
+		border-left: 1px solid $c-gray-600;
+
+		@include breakpoint('tablet-ld') {
+			&:hover {
+				&:not(:disabled) {
+						background-color: $c-gray-600;
+				}
+			}
+		}
+	}
+
 	&__content {
 		align-items: center;
 		display: flex;

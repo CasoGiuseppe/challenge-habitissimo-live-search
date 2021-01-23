@@ -3,6 +3,7 @@ import getters, {
   GET_SEARCH_KEY,
   GET_SEARCH_VISIBILITY,
   GET_SEARCH_LOADING,
+  GET_SEARCH_RESULTS,
 } from './getters';
 
 // mutations
@@ -25,7 +26,16 @@ const defaultValues = {
   key: null,
   visibility: null,
   loading: false,
-  results: [],
+  results: [
+    {
+      id: 1,
+      name: 'Rick Sanchez',
+      status: 'Alive',
+      species: 'Human',
+      gender: 'Male',
+      image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+    },
+  ],
 };
 
 export const search = {

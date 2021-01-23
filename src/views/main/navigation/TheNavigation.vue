@@ -55,7 +55,7 @@
                 <BaseDataList
                   v-if="getSearchVisibility"
                   :size="6"
-                  :items="[0, 1, 2, 3, 4, 5, 6, 7]"
+                  :items="getSearchResults"
                   @blur="focus === true ? null : stopSearch()"
                 >
                   <!-- RESULTS -->
@@ -63,8 +63,16 @@
                     slot="content"
                     slot-scope="row"
                   >
-                    <template v-for="(item) in row">
-                      {{ `item-${item}`}}
+                    <template v-for="(item, index) in row">
+                      <span
+                        :key="index"
+                        v-html="
+                          helper.highlightSubString({
+                            subString: getSearchKey,
+                            string: item.name,
+                            style: 'highlight'
+                          })"
+                      />
                     </template>
                   </template>
                   <!-- /// -->
@@ -112,13 +120,14 @@
         >
           <BaseButton
             is-squared
+            is-light
             @click="changeExtraPanel"
           >
               <template #content>
                 <BaseIcon
                   :name="$icons.hamburger"
                   size="normal"
-                  color="light"
+                  color="dark-gray"
                 />
               </template>
             </BaseButton>
@@ -131,6 +140,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { Response } from '@/services/modules/search';
+import { Utilities } from '@/helpers';
 
 export default {
   name: 'TheNavigation',
@@ -138,6 +148,7 @@ export default {
   data() {
     return {
       focus: false,
+      helper: Utilities,
     };
   },
 
@@ -156,6 +167,8 @@ export default {
     ...mapGetters('search', [
       'getSearchVisibility',
       'getSearchLoading',
+      'getSearchResults',
+      'getSearchKey',
     ]),
 
     // GET EXTRA PANEL VIEW
@@ -174,6 +187,7 @@ export default {
       'changeSearchVisibility',
       'changeSearchLoading',
       'resetSearchState',
+      'changeSearchKey',
     ]),
 
     changeExtraPanel() {
@@ -186,7 +200,14 @@ export default {
     },
 
     async startSearch(e) {
+      console.log(e);
       const { length: size } = e;
+
+      // SET KEY SEARCH
+      // IN STORE
+      this.changeSearchKey({
+        key: e,
+      });
 
       // START SEARCH
       // IF KEY LENGHT > 3
