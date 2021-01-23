@@ -1,23 +1,27 @@
+import store from '@/store';
 import { http } from './index';
 
-const characters = '/character';
-
+const characters = '/character/';
 class Characters {
-  static getCharacterByName = async (payload) => {
+  static getCharacterByName = async ({ name }) => {
     try {
       const res = await http.get(
         `${characters}`,
         {
           params: {
-            name: 'ric',
+            name,
           },
         },
       );
-
-      console.log(res.data);
       return res.data;
     } catch (error) {
-      console.log(error);
+      return null;
+    } finally {
+      // CHANGE SEARCH LOADING
+      // ON FALSE
+      store.dispatch('search/changeSearchLoading', {
+        value: false,
+      });
     }
   }
 }

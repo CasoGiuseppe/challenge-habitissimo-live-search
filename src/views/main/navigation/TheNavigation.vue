@@ -67,7 +67,7 @@
                       <span
                         :key="index"
                         v-html="
-                          helper.highlightSubString({
+                          highlightSubString({
                             subString: getSearchKey,
                             string: item.name,
                             style: 'highlight'
@@ -140,7 +140,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { Response } from '@/services/modules/search';
-import { Utilities } from '@/helpers';
+import { highlightSubString } from '@/helpers';
 
 export default {
   name: 'TheNavigation',
@@ -148,7 +148,7 @@ export default {
   data() {
     return {
       focus: false,
-      helper: Utilities,
+      highlightSubString,
     };
   },
 
@@ -200,7 +200,6 @@ export default {
     },
 
     async startSearch(e) {
-      console.log(e);
       const { length: size } = e;
 
       // SET KEY SEARCH
@@ -211,7 +210,9 @@ export default {
 
       // START SEARCH
       // IF KEY LENGHT > 3
-      (size > 3) ? await Response.getSearchresults() : this.stopSearch();
+      (size > 3)
+        ? await Response.getSearchresults({ key: this.getSearchKey })
+        : this.stopSearch();
     },
 
     stopSearch() {

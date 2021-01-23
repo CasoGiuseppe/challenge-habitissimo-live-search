@@ -1,21 +1,29 @@
 import { Characters } from '@/services/http/Characters';
+import { wait } from '@/helpers';
 import store from '@/store';
 
 export class Response {
-  static async getSearchresults() {
-    // const res = await Activities.getAllActivities();
-    // return res;
-
-    // set visibility serach data panel
+  static async getSearchresults({ key }) {
+    // CHANGE SEARCH PANEL VISIBILITY
+    // ON TRUE
     store.dispatch('search/changeSearchVisibility', {
       value: true,
     });
 
-    // set loading state
+    // CHANGE SEARCH LOADING
+    // ON TRUE
     store.dispatch('search/changeSearchLoading', {
       value: true,
     });
 
-    console.log('ciccio');
+    // API CALL
+    // WITH WAIT PROMISE
+    await wait(1500);
+    const res = await Characters.getCharacterByName({
+      name: key,
+    });
+
+    console.log(res.results);
+    // return res;
   }
 }
