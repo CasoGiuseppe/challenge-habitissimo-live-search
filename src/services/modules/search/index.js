@@ -23,7 +23,18 @@ export class Response {
       name: key,
     });
 
-    console.log(res.results);
-    // return res;
+    // FILL STORE WITH RESULTS
+    store.dispatch('search/fillSearchResults', {
+      items: res
+        ? res.results.map((node) => {
+          return {
+            name: node.name,
+            status: node.status,
+            gender: node.gender,
+            image: node.image,
+          };
+        })
+        : [],
+    });
   }
 }

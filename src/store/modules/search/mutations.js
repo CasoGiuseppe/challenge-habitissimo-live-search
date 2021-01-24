@@ -1,6 +1,7 @@
 export const SET_SEARCH_KEY = 'setSearchKey';
 export const SET_SEARCH_VISIBILITY = 'setSearchVisibility';
 export const SET_SEARCH_LOADING = 'setSearchLoading';
+export const SET_SEARCH_RESULTS = 'setSearchResults';
 
 export default {
   /**
@@ -25,5 +26,13 @@ export default {
    */
   [SET_SEARCH_LOADING](state, { value }) {
     state.loading = value;
+  },
+
+  /**
+   * Set search results
+   * @param items {Object}
+   */
+  [SET_SEARCH_RESULTS](state, { items }) {
+    state.results = items;
   },
 };

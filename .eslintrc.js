@@ -16,7 +16,8 @@ module.exports = {
     "import/prefer-default-export": "off",
     'no-unused-vars': 'off',
     'no-unused-expressions': 'off',
-    'consistent-return': 'off'
+    'consistent-return': 'off',
+    'arrow-body-style': 'off'
   },
   overrides: [
     {

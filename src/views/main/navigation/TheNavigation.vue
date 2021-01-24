@@ -53,7 +53,7 @@
                 @leave="onLeave"
               >
                 <BaseDataList
-                  v-if="getSearchVisibility"
+                  v-if="getSearchVisibility && getSearchResults.length > 0"
                   :size="6"
                   :items="getSearchResults"
                   @blur="focus === true ? null : stopSearch()"
@@ -225,7 +225,7 @@ export default {
     },
 
     onExpand(e) {
-      requestAnimationFrame(() => { e.style.height = `${e.scrollHeight}px`; });
+      this.$nextTick(() => requestAnimationFrame(() => { e.style.height = `${e.scrollHeight}px`; }));
     },
 
     onLeave(e) {
