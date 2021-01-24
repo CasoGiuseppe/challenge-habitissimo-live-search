@@ -4,25 +4,24 @@
       <Badge
         v-if="getSelectedItem"
         :image="getSelectedItem.image"
+        :items="$constants.DETAILS"
       >
         <template #title>
           {{ getSelectedItem.name }}
         </template>
 
-        <template #gender>
-          {{ getSelectedItem.gender }}
-        </template>
-
-        <template #status>
-          {{ getSelectedItem.status }}
-        </template>
-
-        <template #origin>
-          {{ getSelectedItem.origin }}
-        </template>
-
-        <template #location>
-          {{ getSelectedItem.location }}
+        <template
+          slot="content"
+          slot-scope="row"
+        >
+          <template v-for="item in row">
+            <span :key="item.label">
+              <span class="badge__label">
+                {{ item.label }}:
+              </span>
+              {{ getSelectedItem[item.value] }}
+            </span>
+          </template>
         </template>
       </Badge>
     </div>

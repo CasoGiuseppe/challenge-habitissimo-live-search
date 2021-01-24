@@ -76,6 +76,11 @@
 
   &__more {
     @include text--medium;
+
+    > * {
+      display: flex;
+      flex-direction: column
+    }
   }
 
   &__label {

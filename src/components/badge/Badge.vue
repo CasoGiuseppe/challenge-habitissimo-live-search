@@ -23,46 +23,16 @@
         <slot name="title" />
       </h2>
       <!-- /// -->
-
-      <!-- GENDER -->
       <p
-        v-if="$slots['gender']"
+        v-for="item in items"
+        :key="item.label"
         class="badge__more"
       >
-        <span class="badge__label">Gender:</span>
-        <slot name="gender" />
+        <slot
+          name="content"
+          :item="item"
+        />
       </p>
-      <!-- /// -->
-
-      <!-- STATUS -->
-      <p
-        v-if="$slots['status']"
-        class="badge__more"
-      >
-        <span class="badge__label">Status:</span>
-        <slot name="status" />
-      </p>
-      <!-- /// -->
-
-      <!-- ORIGIN -->
-      <p
-        v-if="$slots['origin']"
-        class="badge__more"
-      >
-        <span class="badge__label">Origin:</span>
-        <slot name="origin" />
-      </p>
-      <!-- /// -->
-
-      <!-- LOCATION -->
-      <p
-        v-if="$slots['location']"
-        class="badge__more"
-      >
-        <span class="badge__label">Location:</span>
-        <slot name="location" />
-      </p>
-      <!-- /// -->
     </div>
     <!-- /// -->
   </article>
@@ -74,6 +44,11 @@ export default {
   props: {
     image: {
       type: String,
+    },
+
+    items: {
+      type: [Array, Object],
+      default: () => [],
     },
   },
 };
