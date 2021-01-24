@@ -42,7 +42,7 @@
             id="live-search"
             :placeholder="$t(`message.inputs.placeholder`)"
             @input="startSearch"
-            @focus="setFocus"
+            @focus="inputFocus"
             @blur="setFocus"
           >
             <!-- DATA LIST API RESULTS-->
@@ -282,6 +282,13 @@ export default {
       this.focus = state;
 
       this.stopSearch();
+    },
+
+    inputFocus(e) {
+      const { value } = e;
+
+      this.setFocus(e);
+      this.startSearch(value);
     },
 
     onExpand(e) {

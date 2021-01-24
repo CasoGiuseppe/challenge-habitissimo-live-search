@@ -1,6 +1,6 @@
 .the-navigation {
   @include ANM-expand(
-    $duration: .8s
+    $duration: 1.2s
   );
   
   @include ANM-move(
@@ -75,5 +75,17 @@
     right: 0;
     top: 0;
     width: px2rem($base * 8);
+  }
+
+  // FORCE USER MESSAGE
+  // ANIMATION TIMING
+  .user-message {
+    &.expand-leave-active {
+      transition-duration: 0s;
+    }
+
+    &.expand-enter-active {
+      transition-duration: .6s;
+    }
   }
 }

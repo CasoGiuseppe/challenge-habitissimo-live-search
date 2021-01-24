@@ -58,12 +58,14 @@ export default {
     handleFocusState(e) {
       this.$emit('focus', {
         state: true,
+        value: e.target.value,
       });
     },
 
     handleBlurState(e) {
       this.$emit('blur', {
         state: false,
+        value: e.target.value,
       });
     },
   },
