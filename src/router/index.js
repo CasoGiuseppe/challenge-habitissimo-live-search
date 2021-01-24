@@ -14,6 +14,16 @@ const routes = [
       footer: () => import(/* webpackChunkName: "MainFooter" */ '@/views/main/footer/TheFooter'),
     },
   },
+  {
+    path: '/detail/?id',
+    name: 'detail',
+
+    components: {
+      header: () => import(/* webpackChunkName: "MainNavigation" */ '@/views/main/navigation/TheNavigation'),
+      main: () => import(/* webpackChunkName: "MainHome" */ '@/views/detail/Detail'),
+      footer: () => import(/* webpackChunkName: "MainFooter" */ '@/views/main/footer/TheFooter'),
+    },
+  },
 ];
 
 const router = new VueRouter({

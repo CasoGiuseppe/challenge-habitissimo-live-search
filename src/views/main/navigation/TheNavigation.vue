@@ -295,8 +295,10 @@ export default {
 
     inputFocus(e) {
       const { value } = e;
-
       this.setFocus(e);
+
+      // START NEW SEARCH
+      // IF STORE IS EMPTY
       this.getSearchResults.length === 0 && this.startSearch(value);
     },
 
