@@ -9,6 +9,7 @@
         class="base-input__field"
         :id="id"
         :type="type"
+        :value="value"
         :required="isRequired.state"
         :placeholder="placeholder"
         @input="handleInputState"
@@ -84,6 +85,11 @@ export default {
     placeholder: {
       type: String,
       default: 'placeholder',
+    },
+
+    value: {
+      type: String,
+      default: null,
     },
 
     isRequired: {

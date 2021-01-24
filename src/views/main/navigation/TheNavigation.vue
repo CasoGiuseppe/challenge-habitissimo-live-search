@@ -41,9 +41,11 @@
           <BaseInput
             id="live-search"
             :placeholder="$t(`message.inputs.placeholder`)"
+            v-model.trim="form.search"
             @input="startSearch"
             @focus="inputFocus"
             @blur="setFocus"
+            v-click-outside="outClickEvent"
           >
             <!-- DATA LIST API RESULTS-->
             <template #data-list>
@@ -59,7 +61,8 @@
                   :key="getSearchKey"
                   :size="6"
                   :items="getSearchResults"
-                  @blur="focus === true ? null : stopSearch()"
+                  @click="selectItem"
+                  @blur="outClickEvent"
                 >
                   <!-- PRINT RESULTS BY SLOT SCOPE -->
                   <template
@@ -166,15 +169,23 @@
 import { mapGetters, mapActions } from 'vuex';
 import { Response } from '@/services/modules/search';
 import { highlightSubString } from '@/helpers';
+import ClickOutside from 'vue-click-outside';
 
 export default {
   name: 'TheNavigation',
+
+  directives: {
+    ClickOutside,
+  },
 
   data() {
     return {
       focus: false,
       highlightSubString,
       timeout: null,
+      form: {
+        search: '',
+      },
     };
   },
 
@@ -280,15 +291,13 @@ export default {
     setFocus(e) {
       const { state } = e;
       this.focus = state;
-
-      this.stopSearch();
     },
 
     inputFocus(e) {
       const { value } = e;
 
       this.setFocus(e);
-      this.startSearch(value);
+      this.getSearchResults.length === 0 && this.startSearch(value);
     },
 
     onExpand(e) {
@@ -297,6 +306,18 @@ export default {
 
     onLeave(e) {
       requestAnimationFrame(() => { e.style.height = '0px'; });
+    },
+
+    selectItem({ id, value }) {
+      // SET INPUT VALUE
+      // WITH OPTION LABEL
+      this.form.search = value;
+
+      this.stopSearch();
+    },
+
+    outClickEvent() {
+      this.focus === true ? null : this.stopSearch();
     },
   },
 };

@@ -2,13 +2,14 @@
   <ul
     class="base-data-list"
     :style="customStyle"
-    v-click-outside="onBlur"
   >
     <li
       v-for="(item, index) in items"
       :key="index"
       tabindex="0"
       :data-id="item.id"
+      :data-index="index"
+      :data-value="item.name"
       :class="[
         'base-data-list__item',
         indexOf === index ? 'base-data-list--is-selected' : null
@@ -23,14 +24,9 @@
   </ul>
 </template>
 <script>
-import ClickOutside from 'vue-click-outside';
 
 export default {
   name: 'BaseDataList',
-
-  directives: {
-    ClickOutside,
-  },
 
   data() {
     return {
@@ -84,8 +80,11 @@ export default {
 
     // EMIT CLICK EVENT
     handleClickState(e) {
-      const { target: el } = e;
-      this.$emit('click');
+      const { id, value } = e.target.dataset;
+      this.$emit('click', {
+        id,
+        value,
+      });
     },
 
     onBlur() {
