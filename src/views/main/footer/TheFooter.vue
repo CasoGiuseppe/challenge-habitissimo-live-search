@@ -1,5 +1,8 @@
 <template>
-  <section class="the-footer">
+  <section class="
+      the-footer
+      grid
+  ">
     <ul class="
       the-footer__content
       grid__row

@@ -12,7 +12,7 @@ export default {
 
   user: {
     home: {
-      title: 'Encuentra tu personaje preferido de Rick and Morty',
+      title: 'Encuentra tu profesional de confianza',
       message: 'Utiliza nuestro buscador para facilitar la busqueda',
     },
     empty: {

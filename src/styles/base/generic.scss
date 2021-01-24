@@ -51,6 +51,8 @@ body,
     align-items: center;
     flex: 0 0 px2rem($base * 12);
     display: flex;
+    padding-top: px2rem($base * 2);
+    padding-bottom: px2rem($base * 2);
     position: sticky;
     top: 0;
     z-index: 3;
@@ -60,6 +62,8 @@ body,
 
     @include breakpoint('only-phone') {
       flex: 0 0 px2rem($base * 8);
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
     @include breakpoint('tablet-pt') {

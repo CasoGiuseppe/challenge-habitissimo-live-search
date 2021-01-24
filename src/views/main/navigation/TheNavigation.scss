@@ -8,6 +8,12 @@
     $from: translateX(10%),
     $to: translateX(10%)
   );
+
+  @include ANM-move(
+    $name: 'mobileSearch',
+    $from: translateY(10%),
+    $to: translateY(10%)
+  );
   
   $thenavigation: &;
   width: 100%;
@@ -45,7 +51,7 @@
         flex: 2;
 
         @include breakpoint('tablet-ld') {
-          flex: 0 0 30%;
+          flex: 0 0 40%;
         }
       }
     }
@@ -53,24 +59,26 @@
 
   &__search {
     @include breakpoint('only-phone') {
-      @include keyAnimation(appear) {
-        0% {
-          height: 0px;
-          opacity: 0;
-      }
-        100% {
-          height: px2rem($base * 15);
-          opacity: 1;
-        }
-      };
+      // @include keyAnimation(appear) {
+      //   0% {
+      //     // height: 0px;
+      //     opacity: 0;
+      //     transform: translateX(100%);
+      // }
+      //   100% {
+      //     // height: px2rem($base * 20);
+      //     opacity: 1;
+      //     transform: translateX(0);
+      //   }
+      // };
 
-      bottom: 0;
       left: 0;
-      position: absolute;
+      position: fixed;
       width: 100%;
+      top: px2rem($base * 8);
 
       background: rgba($c-gray-300, .8);
-      transform: translateY(100%);
+      // transform: translateY(100%);
 
       animation-name: appear;
       animation-duration: .4s;

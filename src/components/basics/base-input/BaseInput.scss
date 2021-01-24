@@ -3,9 +3,25 @@
   @include text--regular;
 
   display: flex;
+  flex-direction: column;
   position: relative;
   width: 100%;
-  
+
+  &__title {
+    @include text--small;
+    @include text--bold;
+
+    color: $c-gray-800;
+
+    @include breakpoint('only-phone') {
+      @include text--xsmall;
+    }
+
+    + #{$baseinput}__label {
+      margin-top: px2rem($base);
+    }
+  }
+
   &__label {
     align-items: center;
     display: flex;
@@ -25,7 +41,7 @@
     &:not(:focus-within) {
       @include breakpoint('tablet-ld') {
         &:hover {
-          background: $c-gray-300;
+          background: $c-gray-100;
           border: 1px solid $c-gray-600;
 
           #{$baseinput}__field {

@@ -32,115 +32,126 @@
         <!-- /// -->
 
         <!-- LIVE SEARCH + BTN-->
-        <li
-          v-if="extraPanel"
-          class="
-            the-navigation__search
-            grid__col-xs-12
-            grid__col-sm-4
-            grid__col--end
-        ">
-          <BaseInput
-            id="live-search"
-            :placeholder="$t(`message.inputs.placeholder`)"
-            v-model.trim="form.search"
-            @input="startSearch"
-            @focus="inputFocus"
-            @blur="setFocus"
-            v-click-outside="outClickEvent"
-          >
-            <!-- DATA LIST API RESULTS-->
-            <template #data-list>
-              <transition
-                name="expand"
-                mode="out-in"
-                @enter="onExpand"
-                @leave="onLeave"
-              >
-                <!-- API CALL RETURN > 0 -->
-                <BaseDataList
-                  v-if="showResults"
-                  :key="getSearchKey"
-                  :size="6"
-                  :items="getSearchResults"
-                  @click="selectItem"
-                  @blur="outClickEvent"
+        <transition
+          mode="out-in"
+          name="mobileSearch"
+        >
+          <li
+            v-if="extraPanel"
+            class="
+              the-navigation__search
+              grid__col-xs-12
+              grid__col-sm-4
+              grid__col--end
+          ">
+            <BaseInput
+              id="live-search"
+              :placeholder="$t(`message.inputs.placeholder`)"
+              v-model.trim="form.search"
+              @input="startSearch"
+              @focus="inputFocus"
+              @blur="setFocus"
+              v-click-outside="outClickEvent"
+            >
+              <!-- TITLE -->
+              <template #title>
+                Encuentra profesionales de confianza
+              </template>
+              <!-- /// -->
+
+              <!-- DATA LIST API RESULTS-->
+              <template #data-list>
+                <transition
+                  name="expand"
+                  mode="out-in"
+                  @enter="onExpand"
+                  @leave="onLeave"
                 >
-                  <!-- PRINT RESULTS BY SLOT SCOPE -->
-                  <template
-                    slot="content"
-                    slot-scope="row"
+                  <!-- API CALL RETURN > 0 -->
+                  <BaseDataList
+                    v-if="showResults"
+                    :key="getSearchKey"
+                    :size="6"
+                    :items="getSearchResults"
+                    @click="selectItem"
+                    @blur="outClickEvent"
                   >
-                    <template v-for="(item, index) in row">
-                      <span
-                        :key="index"
-                        v-html="
-                          `${highlightSubString({
-                            subString: getSearchKey.trim(),
-                            string: item.name,
-                            style: 'highlight'
-                          })} - <small class='small'>${item.gender}</small>`"
+                    <!-- PRINT RESULTS BY SLOT SCOPE -->
+                    <template
+                      slot="content"
+                      slot-scope="row"
+                    >
+                      <template v-for="(item, index) in row">
+                        <span
+                          :key="index"
+                          v-html="
+                            `${highlightSubString({
+                              subString: getSearchKey.trim(),
+                              string: item.name,
+                              style: 'highlight'
+                            })} - <small class='small'>${item.gender}</small>`"
+                        />
+                      </template>
+                    </template>
+                    <!-- /// -->
+                  </BaseDataList>
+                  <!-- /// -->
+
+                  <!-- API CALL RETURN IS VOID -->
+                  <UserMessage
+                    v-else-if="showError"
+                    key="void"
+                  >
+                    <template #icon>
+                      <BaseIcon
+                        :name="$icons.sad"
+                        size="large"
+                        color="warning"
                       />
                     </template>
-                  </template>
+                    <template #title>
+                      {{ $t(`message.user.empty.title`) }}
+                    </template>
+                    <template #message>
+                      {{ $t(`message.user.empty.message`) }}
+                    </template>
+                  </UserMessage>
                   <!-- /// -->
-                </BaseDataList>
-                <!-- /// -->
+                </transition>
+              </template>
+              <!-- /// -->
 
-                <!-- API CALL RETURN IS VOID -->
-                <UserMessage
-                  v-else-if="showError"
-                  key="void"
+              <template #icon>
+                <transition
+                  mode="out-in"
+                  name="loading"
                 >
-                  <template #icon>
+                  <!-- ICON: SEARCH -->
+                  <span
+                    v-if="!getSearchLoading"
+                    :key="false"
+                  >
                     <BaseIcon
-                      :name="$icons.sad"
-                      size="large"
-                      color="warning"
+                      :name="$icons.search"
+                      size="medium"
+                      color="dark-gray"
                     />
-                  </template>
-                  <template #title>
-                    {{ $t(`message.user.empty.title`) }}
-                  </template>
-                  <template #message>
-                    {{ $t(`message.user.empty.message`) }}
-                  </template>
-                </UserMessage>
-                <!-- /// -->
-              </transition>
-            </template>
-            <!-- /// -->
+                  </span>
+                  <!-- /// -->
 
-            <template #icon>
-              <transition
-                mode="out-in"
-                name="loading"
-              >
-                <!-- ICON: SEARCH -->
-                <span
-                  v-if="!getSearchLoading"
-                  :key="false"
-                >
-                  <BaseIcon
-                    :name="$icons.search"
-                    size="medium"
-                    color="dark-gray"
+                  <!-- LOADER -->
+                  <img
+                    v-else
+                    :key="true"
+                    class="loader"
+                    src="@/assets/images/svg/loader.svg"
                   />
-                </span>
-                <!-- /// -->
-
-                <!-- LOADER -->
-                <img
-                  v-else
-                  :key="true"
-                  class="loader"
-                  src="@/assets/images/svg/loader.svg"
-                />
-                <!-- /// -->
-              </transition>
-            </template>
-          </BaseInput>
-        </li>
+                  <!-- /// -->
+                </transition>
+              </template>
+            </BaseInput>
+          </li>
+        </transition>
         <!-- /// -->
 
         <!-- MOBILE BTN TRIGGER -->
@@ -150,14 +161,13 @@
         >
           <BaseButton
             is-squared
-            is-light
             @click="changeExtraPanel"
           >
               <template #content>
                 <BaseIcon
                   :name="$icons.hamburger"
                   size="normal"
-                  color="dark-gray"
+                  color="light"
                 />
               </template>
             </BaseButton>
@@ -253,6 +263,7 @@ export default {
         value: !this.getExtraPanelState,
       });
 
+      // RESET SEARCH
       this.stopSearch();
     },
 
@@ -284,6 +295,7 @@ export default {
           clearTimeout(this.timeout);
         }, 1000);
       } else {
+        // RESET SEARCH
         this.stopSearch();
       }
     },
@@ -331,8 +343,9 @@ export default {
         params: { id },
       });
 
-      // RESET SEARCH
-      this.stopSearch();
+      // ON MOBILE DEVICE
+      // CLOSE INPUT PANEL
+      this.changeExtraPanel();
     },
 
     outClickEvent() {

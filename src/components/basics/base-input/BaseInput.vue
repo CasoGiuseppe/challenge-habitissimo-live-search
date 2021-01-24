@@ -1,6 +1,11 @@
 <template>
-  <div
-    class="base-input">
+  <div class="base-input">
+    <h3
+      v-if="$slots['title']"
+      class="base-input__title"
+    >
+      <slot name="title" />
+    </h3>
     <label
       class="base-input__label"
       :for="id"
