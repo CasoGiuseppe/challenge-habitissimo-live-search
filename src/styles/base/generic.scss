@@ -43,7 +43,7 @@ body,
   &__header,
   &__main,
   &__footer {
-    padding: 0 px2rem($base * 2);
+    padding: 0 px2rem($base * 4);
     width: 100%;
   }
 
@@ -53,6 +53,9 @@ body,
     display: flex;
     position: sticky;
     top: 0;
+    z-index: 3;
+
+    background: $c-white;
     box-shadow: 0px px2rem($base - 2) px2rem($base) 0px rgba(0,0,0,0.1);
 
     @include breakpoint('only-phone') {
@@ -66,6 +69,8 @@ body,
 
   &__main {
     flex: 2;
+    padding: px2rem($base * 4);
+
     background: $c-core-blue;
   }
 

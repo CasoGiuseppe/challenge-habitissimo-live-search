@@ -3,6 +3,7 @@ export const SET_SEARCH_VISIBILITY = 'setSearchVisibility';
 export const SET_SEARCH_LOADING = 'setSearchLoading';
 export const SET_SEARCH_RESULTS = 'setSearchResults';
 export const SET_EMPTY_ERROR = 'setEmptyError';
+export const SET_SELECTED_ITEM = 'setSelectedItem';
 
 export default {
   /**
@@ -43,5 +44,13 @@ export default {
    */
   [SET_EMPTY_ERROR](state, { value }) {
     state.error = value;
+  },
+
+  /**
+   * Set selected ID
+   * @param item {Object}
+   */
+  [SET_SELECTED_ITEM](state, { item }) {
+    state.selected = item;
   },
 };

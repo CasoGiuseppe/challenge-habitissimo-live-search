@@ -210,6 +210,7 @@ export default {
       'getSearchResults',
       'getSearchKey',
       'getErrorState',
+      'getItemByID',
     ]),
 
     // GET EXTRA PANEL VIEW
@@ -243,6 +244,7 @@ export default {
       'resetSearchState',
       'changeSearchKey',
       'fillSearchResults',
+      'changeSelectedItem',
     ]),
 
     changeExtraPanel() {
@@ -316,12 +318,21 @@ export default {
       // SET INPUT VALUE
       // WITH OPTION LABEL
       this.form.search = value;
-      this.stopSearch();
 
+      // SAVE SELECTED ITEM
+      this.changeSelectedItem({
+        item: this.getItemByID({ id: Math.floor(id) }),
+      });
+
+      // CHANGE ROUTE
+      // TO DETAIL PAGE
       this.$router.push({
         name: 'detail',
         params: { id },
       });
+
+      // RESET SEARCH
+      this.stopSearch();
     },
 
     outClickEvent() {

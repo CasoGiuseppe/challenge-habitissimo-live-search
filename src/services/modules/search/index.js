@@ -27,6 +27,8 @@ export class Response {
             status: node.status,
             gender: node.gender,
             image: node.image,
+            origin: node.origin.name,
+            location: node.location.name,
           };
         })
         : [],

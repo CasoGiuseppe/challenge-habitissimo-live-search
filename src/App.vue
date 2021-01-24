@@ -17,7 +17,7 @@
         name="main-content"
       >
         <router-view
-          :key="$route.name"
+          :key="`${$route.name}-${$route.params ? $route.params.id : 'home'}`"
           name="main"
         />
       </transition>

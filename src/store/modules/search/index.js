@@ -4,6 +4,8 @@ import getters, {
   GET_SEARCH_VISIBILITY,
   GET_SEARCH_LOADING,
   GET_SEARCH_RESULTS,
+  GET_ITEM_BY_ID,
+  GET_SELECTED_ITEM,
 } from './getters';
 
 // mutations
@@ -13,6 +15,7 @@ import mutations, {
   SET_SEARCH_LOADING,
   SET_SEARCH_RESULTS,
   SET_EMPTY_ERROR,
+  SET_SELECTED_ITEM,
 } from './mutations';
 
 // actions
@@ -23,6 +26,7 @@ import actions, {
   RESET_SEARCH_STATE,
   FILL_SEARCH_RESULTS,
   EMPTY_RESULTS,
+  CHANGE_SELECTED_ITEM,
 } from './actions';
 
 // default state values
@@ -31,6 +35,7 @@ const defaultValues = {
   visibility: null,
   loading: false,
   error: false,
+  selected: null,
   results: [],
 };
 
@@ -67,6 +72,10 @@ export const search = {
 
     [EMPTY_RESULTS]({ commit }, payload) {
       commit(SET_EMPTY_ERROR, payload);
+    },
+
+    [CHANGE_SELECTED_ITEM]({ commit }, payload) {
+      commit(SET_SELECTED_ITEM, payload);
     },
   },
 

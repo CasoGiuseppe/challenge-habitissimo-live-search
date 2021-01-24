@@ -1,0 +1,87 @@
+.badge {
+  $badge: &;
+
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+
+  @include breakpoint('tablet-pt') {
+    align-items: flex-start;
+    flex-direction: row;
+  }
+
+  &__image {
+    display: flex;
+    flex-direction: column;
+    padding: px2rem($base);
+
+    background: $c-white;
+    border-radius: px2rem($base);
+
+    @include breakpoint('only-phone') {
+      width: 100%;
+
+      > img {
+        width: 100%;
+      }
+    }
+
+    > img {
+      + #{$badge}__caption {
+        margin-top: px2rem($base * 2)
+      }
+    }
+
+    + #{$badge}__info {
+      flex: 1;
+      margin: px2rem($base * 2) 0 0;
+      width: 100%;
+
+      @include breakpoint('tablet-pt') {
+        margin: 0 0 0 px2rem($base * 2);
+        width: auto
+      }
+    }
+  }
+
+  &__caption {
+    @include text--xsmall;
+    color: $c-gray-700;
+  }
+
+  &__title,
+  &__more {
+    @include text--bold;
+
+    display: flex;
+    flex-direction: column;
+    color: $c-white;
+
+    text-transform: uppercase;
+  }
+
+  &__title {
+    @include text--big;
+
+    @include breakpoint('tablet-pt') {
+      @include text--xbig;
+    }
+
+    ~ #{$badge}__more {
+      margin-top: px2rem($base * 3)
+    }
+  }
+
+  &__more {
+    @include text--medium;
+  }
+
+  &__label {
+    @include text--xsmall;
+    @include text--regular;
+
+    text-transform: none;
+  }
+}

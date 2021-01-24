@@ -28,7 +28,9 @@
   }
 
   &__content {
-    li {
+    > li {
+      flex: 1;
+
       + li {
         @include breakpoint('only-phone') {
           &:not(#{$thenavigation}__mobile-trigger) {
@@ -38,14 +40,28 @@
           }
         }
       }
+
+      &#{$thenavigation}__search {
+        flex: 2;
+
+        @include breakpoint('tablet-ld') {
+          flex: 0 0 30%;
+        }
+      }
     }
   }
 
   &__search {
     @include breakpoint('only-phone') {
       @include keyAnimation(appear) {
-        0% { height: 0px; }
-        100% { height: px2rem($base * 12); }
+        0% {
+          height: 0px;
+          opacity: 0;
+      }
+        100% {
+          height: px2rem($base * 15);
+          opacity: 1;
+        }
       };
 
       bottom: 0;

@@ -56,6 +56,10 @@
     * {
       pointer-events: none;
     }
+
+    + #{$basedatalist}__item {
+      margin-top: 0;
+    }
   }
 
   &--is-selected {
