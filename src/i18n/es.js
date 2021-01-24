@@ -11,6 +11,10 @@ export default {
   },
 
   user: {
+    home: {
+      title: 'Encuentra tu personaje preferido de Rick and Morty',
+      message: 'Utiliza nuestro buscador para facilitar la busqueda',
+    },
     empty: {
       title: 'Ups! No hemos encontrado lo que estás buscando',
       message: 'Vuelve a intentarlo con otra palabra',

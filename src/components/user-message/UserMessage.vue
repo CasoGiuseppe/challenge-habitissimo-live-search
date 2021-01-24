@@ -1,5 +1,10 @@
 <template>
-  <aside class="user-message">
+  <aside
+    :class="[
+      isSoBig ? 'user-message--is-so-big' : null,
+      isLight ? 'user-message--is-light' : null,
+      'user-message'
+    ]">
     <!-- ICON: CUSTOM -->
     <div
       v-if="$slots['icon']"
@@ -28,4 +33,21 @@
     <!-- /// -->
   </aside>
 </template>
+<script>
+export default {
+  name: 'UserMessage',
+
+  props: {
+    isSoBig: {
+      type: Boolean,
+      default: false,
+    },
+
+    isLight: {
+      type: Boolean,
+      default: false,
+    },
+  },
+};
+</script>
 <style lang="scss" src="./UserMessage.scss" />

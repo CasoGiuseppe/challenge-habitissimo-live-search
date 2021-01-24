@@ -4,6 +4,7 @@ import {
   mdiTextSearch,
   mdiMagnify,
   mdiEmoticonSadOutline,
+  mdiAccountSearch,
 } from '@mdi/js';
 
 export default {
@@ -11,4 +12,5 @@ export default {
   hamburger: mdiTextSearch,
   search: mdiMagnify,
   sad: mdiEmoticonSadOutline,
+  characterSearch: mdiAccountSearch,
 };

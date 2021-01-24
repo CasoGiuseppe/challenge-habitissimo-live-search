@@ -11,7 +11,16 @@
 
     <!-- MAIN CONTENT ROUTER VIEW: HOME + SEARCH RESULT-->
     <section class="app__main">
-      <router-view name="main" />
+      <transition
+        appear
+        mode="out-in"
+        name="main-content"
+      >
+        <router-view
+          :key="$route.name"
+          name="main"
+        />
+      </transition>
     </section>
     <!-- /// -->
 

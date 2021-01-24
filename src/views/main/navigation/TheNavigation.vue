@@ -17,14 +17,16 @@
           grid__col-sm-8
         ">
           <h1 class="the-navigation__wrap">
-            <a href="/">
+            <router-link
+              :to="{ name: 'start' }"
+            >
               <figure class="the-navigation__logo">
                 <img
                   src="@/assets/images/elements/logo.webp"
                   :alt="$t(`message.company`)"
                 >
               </figure>
-            </a>
+            </router-link>
           </h1>
         </li>
         <!-- /// -->
@@ -314,8 +316,12 @@ export default {
       // SET INPUT VALUE
       // WITH OPTION LABEL
       this.form.search = value;
-
       this.stopSearch();
+
+      this.$router.push({
+        name: 'detail',
+        params: { id },
+      });
     },
 
     outClickEvent() {

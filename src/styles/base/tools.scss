@@ -22,6 +22,10 @@ $browser-context: 16;
   font-weight: $bold;
 }
 
+@mixin text--big {
+  font-size: px2rem(26);
+}
+
 @mixin text--medium {
   font-size: px2rem(16);
 }

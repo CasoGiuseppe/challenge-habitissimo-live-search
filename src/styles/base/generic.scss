@@ -28,6 +28,13 @@ body,
 }
 
 .app {
+  @include ANM-move(
+    $name: 'main-content',
+    $from: translateY(5%),
+    $to: translateY(5%),
+    $duration: .4s
+  );
+
   align-items: center;
   height: 100vh;
   display: flex;

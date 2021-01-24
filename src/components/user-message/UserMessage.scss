@@ -16,10 +16,26 @@
     + #{$usermessage}__text {
       margin-top: px2rem($base * 2);
     }
+
+    #{$usermessage}--is-so-big & {
+      @include text--big;
+    }
+
+    #{$usermessage}--is-light & {
+      color: $c-white
+    }
   }
 
   &__text {
     @include text--xsmall;
     @include text--regular;
+
+    #{$usermessage}--is-so-big & {
+      @include text--medium;
+    }
+
+    #{$usermessage}--is-light & {
+      color: $c-white
+    }
   }
 }
