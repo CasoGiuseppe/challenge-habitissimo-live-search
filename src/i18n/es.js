@@ -9,4 +9,11 @@ export default {
   inputs: {
     placeholder: 'Qué necesitas...',
   },
+
+  user: {
+    empty: {
+      title: 'Ups! No hemos encontrado lo que estás buscando',
+      message: 'Vuelve a intentarlo con otra palabra',
+    },
+  },
 };

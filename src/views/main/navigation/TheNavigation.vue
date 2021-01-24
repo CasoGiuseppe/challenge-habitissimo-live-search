@@ -49,16 +49,19 @@
             <template #data-list>
               <transition
                 name="expand"
+                mode="out-in"
                 @enter="onExpand"
                 @leave="onLeave"
               >
+                <!-- API CALL RETURN > 0 -->
                 <BaseDataList
-                  v-if="getSearchVisibility && getSearchResults.length > 0"
+                  v-if="showResults"
+                  :key="getSearchKey"
                   :size="6"
                   :items="getSearchResults"
                   @blur="focus === true ? null : stopSearch()"
                 >
-                  <!-- RESULTS -->
+                  <!-- PRINT RESULTS BY SLOT SCOPE -->
                   <template
                     slot="content"
                     slot-scope="row"
@@ -67,16 +70,38 @@
                       <span
                         :key="index"
                         v-html="
-                          highlightSubString({
-                            subString: getSearchKey,
+                          `${highlightSubString({
+                            subString: getSearchKey.trim(),
                             string: item.name,
                             style: 'highlight'
-                          })"
+                          })} - <small class='small'>${item.gender}</small>`"
                       />
                     </template>
                   </template>
                   <!-- /// -->
                 </BaseDataList>
+                <!-- /// -->
+
+                <!-- API CALL RETURN IS VOID -->
+                <UserMessage
+                  v-else-if="showError"
+                  key="void"
+                >
+                  <template #icon>
+                    <BaseIcon
+                      :name="$icons.sad"
+                      size="large"
+                      color="warning"
+                    />
+                  </template>
+                  <template #title>
+                    {{ $t(`message.user.empty.title`) }}
+                  </template>
+                  <template #message>
+                    {{ $t(`message.user.empty.message`) }}
+                  </template>
+                </UserMessage>
+                <!-- /// -->
               </transition>
             </template>
             <!-- /// -->
@@ -86,7 +111,7 @@
                 mode="out-in"
                 name="loading"
               >
-                <!-- icon search -->
+                <!-- ICON: SEARCH -->
                 <span
                   v-if="!getSearchLoading"
                   :key="false"
@@ -99,7 +124,7 @@
                 </span>
                 <!-- /// -->
 
-                <!-- loader -->
+                <!-- LOADER -->
                 <img
                   v-else
                   :key="true"
@@ -149,6 +174,7 @@ export default {
     return {
       focus: false,
       highlightSubString,
+      timeout: null,
     };
   },
 
@@ -157,6 +183,7 @@ export default {
     BaseIcon: () => import(/* webpackChunkName: "BaseIcon" */ '@/components/basics/base-icon/BaseIcon'),
     BaseInput: () => import(/* webpackChunkName: "BaseInput" */ '@/components/basics/base-input/BaseInput'),
     BaseDataList: () => import(/* webpackChunkName: "BaseDataList" */ '@/components/basics/base-data-list/BaseDataList'),
+    UserMessage: () => import(/* webpackChunkName: "UserMessage" */ '@/components/user-message/UserMessage'),
   },
 
   computed: {
@@ -169,12 +196,26 @@ export default {
       'getSearchLoading',
       'getSearchResults',
       'getSearchKey',
+      'getErrorState',
     ]),
 
     // GET EXTRA PANEL VIEW
     // ON DEVICE MODE
     extraPanel() {
       return (this.$mq === 'mobile' && this.getExtraPanelState) || (this.$mq === 'tablet');
+    },
+
+    // SHOW ERROR CONDITION
+    showError() {
+      return this.getErrorState
+              && this.getSearchVisibility;
+    },
+
+    // SHOW RESULTS CONDITION
+    showResults() {
+      return this.getSearchResults.length > 0
+              && !this.getErrorState
+              && this.getSearchVisibility;
     },
   },
 
@@ -188,6 +229,7 @@ export default {
       'changeSearchLoading',
       'resetSearchState',
       'changeSearchKey',
+      'fillSearchResults',
     ]),
 
     changeExtraPanel() {
@@ -200,6 +242,8 @@ export default {
     },
 
     async startSearch(e) {
+      clearTimeout(this.timeout);
+
       const { length: size } = e;
 
       // SET KEY SEARCH
@@ -210,22 +254,38 @@ export default {
 
       // START SEARCH
       // IF KEY LENGHT > 3
-      (size > 3)
-        ? await Response.getSearchresults({ key: this.getSearchKey })
-        : this.stopSearch();
+      // AND 1SEC OF DEBOUNCE
+      if (size > 3) {
+        // START LOADING ICON
+        this.changeSearchLoading({ value: true });
+
+        // EMPTY STORE RESULT
+        // UNTIL NEW SEARCH
+        this.fillSearchResults({ items: [] });
+
+        // DEBOUNCE
+        this.timeout = setTimeout(() => {
+          Response.getSearchresults({ key: this.getSearchKey });
+          clearTimeout(this.timeout);
+        }, 1000);
+      } else {
+        this.stopSearch();
+      }
     },
 
     stopSearch() {
-      this.$nextTick(() => this.resetSearchState({ value: false }));
+      this.resetSearchState({ value: false });
     },
 
     setFocus(e) {
       const { state } = e;
       this.focus = state;
+
+      this.stopSearch();
     },
 
     onExpand(e) {
-      this.$nextTick(() => requestAnimationFrame(() => { e.style.height = `${e.scrollHeight}px`; }));
+      requestAnimationFrame(() => { e.style.height = `${e.scrollHeight}px`; });
     },
 
     onLeave(e) {

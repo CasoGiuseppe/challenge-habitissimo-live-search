@@ -1,0 +1,25 @@
+.user-message {
+  $usermessage: &;
+
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: px2rem($base * 3);
+
+  &__title {
+    @include text--small;
+    @include text--bold;
+
+    color: $c-core-blue;
+    text-align: center;
+
+    + #{$usermessage}__text {
+      margin-top: px2rem($base * 2);
+    }
+  }
+
+  &__text {
+    @include text--xsmall;
+    @include text--regular;
+  }
+}

@@ -2,6 +2,7 @@ export const SET_SEARCH_KEY = 'setSearchKey';
 export const SET_SEARCH_VISIBILITY = 'setSearchVisibility';
 export const SET_SEARCH_LOADING = 'setSearchLoading';
 export const SET_SEARCH_RESULTS = 'setSearchResults';
+export const SET_EMPTY_ERROR = 'setEmptyError';
 
 export default {
   /**
@@ -14,7 +15,7 @@ export default {
 
   /**
    * Set search visibility
-   * @param value {String}
+   * @param value {Boolean}
    */
   [SET_SEARCH_VISIBILITY](state, { value }) {
     state.visibility = value;
@@ -22,7 +23,7 @@ export default {
 
   /**
    * Set search loading
-   * @param value {String}
+   * @param value {Boolean}
    */
   [SET_SEARCH_LOADING](state, { value }) {
     state.loading = value;
@@ -34,5 +35,13 @@ export default {
    */
   [SET_SEARCH_RESULTS](state, { items }) {
     state.results = items;
+  },
+
+  /**
+   * Set error state
+   * @param value {Boolean}
+   */
+  [SET_EMPTY_ERROR](state, { value }) {
+    state.error = value;
   },
 };

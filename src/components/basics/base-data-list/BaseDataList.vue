@@ -8,7 +8,7 @@
       v-for="(item, index) in items"
       :key="index"
       tabindex="0"
-      :data-index="index"
+      :data-id="item.id"
       :class="[
         'base-data-list__item',
         indexOf === index ? 'base-data-list--is-selected' : null

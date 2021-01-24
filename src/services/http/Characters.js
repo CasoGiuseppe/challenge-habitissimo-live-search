@@ -1,4 +1,5 @@
 import store from '@/store';
+import { Errors } from '@/assets/utilities/errors';
 import { http } from './index';
 
 const characters = '/character/';
@@ -15,7 +16,11 @@ class Characters {
       );
       return res.data;
     } catch (error) {
-      return null;
+      // SET ERROR VALUE
+      // CASE: EMPTY RESULT
+      store.dispatch(`search/${Errors.EMPTY_RESULTS}`, {
+        value: true,
+      });
     } finally {
       // CHANGE SEARCH LOADING
       // ON FALSE

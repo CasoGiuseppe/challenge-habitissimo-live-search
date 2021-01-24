@@ -3,10 +3,12 @@ import {
   mdiFileDocumentEditOutline,
   mdiTextSearch,
   mdiMagnify,
+  mdiEmoticonSadOutline,
 } from '@mdi/js';
 
 export default {
   bill: mdiFileDocumentEditOutline,
   hamburger: mdiTextSearch,
   search: mdiMagnify,
+  sad: mdiEmoticonSadOutline,
 };

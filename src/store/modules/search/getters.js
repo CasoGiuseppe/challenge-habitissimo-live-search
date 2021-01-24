@@ -2,6 +2,7 @@ export const GET_SEARCH_KEY = 'getSearchKey';
 export const GET_SEARCH_VISIBILITY = 'getSearchVisibility';
 export const GET_SEARCH_LOADING = 'getSearchLoading';
 export const GET_SEARCH_RESULTS = 'getSearchResults';
+export const GET_ERROR_STATE = 'getErrorState';
 
 export default {
   /**
@@ -27,4 +28,10 @@ export default {
    * @param state
    */
   [GET_SEARCH_RESULTS]: (state) => state.results,
+
+  /**
+   * Get error state
+   * @param state
+   */
+  [GET_ERROR_STATE]: (state) => state.error,
 };

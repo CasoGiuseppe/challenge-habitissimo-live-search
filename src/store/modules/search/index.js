@@ -12,6 +12,7 @@ import mutations, {
   SET_SEARCH_VISIBILITY,
   SET_SEARCH_LOADING,
   SET_SEARCH_RESULTS,
+  SET_EMPTY_ERROR,
 } from './mutations';
 
 // actions
@@ -21,6 +22,7 @@ import actions, {
   CHANGE_SEARCH_LOADING,
   RESET_SEARCH_STATE,
   FILL_SEARCH_RESULTS,
+  EMPTY_RESULTS,
 } from './actions';
 
 // default state values
@@ -28,6 +30,7 @@ const defaultValues = {
   key: null,
   visibility: null,
   loading: false,
+  error: false,
   results: [],
 };
 
@@ -55,10 +58,15 @@ export const search = {
       commit(SET_SEARCH_VISIBILITY, payload);
       commit(SET_SEARCH_LOADING, payload);
       commit(SET_SEARCH_RESULTS, { items: [] });
+      commit(SET_EMPTY_ERROR, payload);
     },
 
     [FILL_SEARCH_RESULTS]({ commit }, payload) {
       commit(SET_SEARCH_RESULTS, payload);
+    },
+
+    [EMPTY_RESULTS]({ commit }, payload) {
+      commit(SET_EMPTY_ERROR, payload);
     },
   },
 

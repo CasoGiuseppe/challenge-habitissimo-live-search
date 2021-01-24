@@ -76,3 +76,8 @@ body,
   @include text--bold;
   color: $c-core-blue;
 }
+
+.small {
+  @include text--xxsmall;
+  color: $c-gray-600;
+}

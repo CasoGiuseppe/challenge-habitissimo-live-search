@@ -4,23 +4,17 @@ import store from '@/store';
 
 export class Response {
   static async getSearchresults({ key }) {
+    store.dispatch('search/resetSearchState', { value: false });
+
+    // API CALL
+    const res = await Characters.getCharacterByName({
+      name: key,
+    });
+
     // CHANGE SEARCH PANEL VISIBILITY
     // ON TRUE
     store.dispatch('search/changeSearchVisibility', {
       value: true,
-    });
-
-    // CHANGE SEARCH LOADING
-    // ON TRUE
-    store.dispatch('search/changeSearchLoading', {
-      value: true,
-    });
-
-    // API CALL
-    // WITH WAIT PROMISE
-    await wait(1500);
-    const res = await Characters.getCharacterByName({
-      name: key,
     });
 
     // FILL STORE WITH RESULTS
@@ -28,6 +22,7 @@ export class Response {
       items: res
         ? res.results.map((node) => {
           return {
+            id: node.id,
             name: node.name,
             status: node.status,
             gender: node.gender,

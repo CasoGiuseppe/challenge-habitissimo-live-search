@@ -17,7 +17,8 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-unused-expressions': 'off',
     'consistent-return': 'off',
-    'arrow-body-style': 'off'
+    'arrow-body-style': 'off',
+    'max-len': 'off',
   },
   overrides: [
     {

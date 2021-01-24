@@ -16,13 +16,13 @@
 
     cursor: pointer;
 
-    // @include breakpoint('tablet-ld') {
-    &:hover {
-      &::before {
-        height: 100%;
+    @include breakpoint('tablet-ld') {
+      &:hover {
+        &::before {
+          height: 100%;
+        }
       }
     }
-    //}
 
     &::before {
       height: 0;
