@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseDataList.vue has the expected html structure 1`] = `
+<ul class="base-data-list" style="--max-item-length: 1;">
+  <li tabindex="0" data-id="2" data-index="0" data-value="Morthy" class="base-data-list__item base-data-list--is-selected"><span class="slot-content">content</span></li>
+</ul>
+`;

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseButton.vue has the expected html structure 1`] = `
+<text data-id="001" disabled="disabled" class="base-button--is-primary base-button--is-rounded base-button--is-squared base-button--is-warning base-button--is-light base-button--is-clear base-button">
+  <transition-stub name="button-label" mode="out-in">
+    <div class="base-button__content"><span class="slot-content">content</span></div>
+  </transition-stub>
+</text>
+`;

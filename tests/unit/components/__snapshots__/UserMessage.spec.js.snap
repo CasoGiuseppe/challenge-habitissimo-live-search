@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserMessage.vue has the expected html structure 1`] = `
+<aside class="user-message--is-so-big user-message">
+  <!---->
+  <!---->
+  <!---->
+</aside>
+`;
