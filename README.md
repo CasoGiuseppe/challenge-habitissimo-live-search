@@ -47,7 +47,7 @@ npm run test:e2e
 npm run lint
 ```
 
-### Local build
+### Compiles for production and test in local
 ```
 npm run start
 go to: http://localhost:5000/
