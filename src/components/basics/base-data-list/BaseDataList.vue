@@ -1,5 +1,6 @@
 <template>
   <ul
+    data-cy="data-list"
     class="base-data-list"
     :style="customStyle"
   >

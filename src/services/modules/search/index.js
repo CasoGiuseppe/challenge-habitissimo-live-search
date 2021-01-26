@@ -6,6 +6,9 @@ export class Response {
   static async getSearchresults({ key }) {
     store.dispatch('search/resetSearchState', { value: false });
 
+    // WRITE STORE IF
+    // NOT TESTING MODE
+    // if (!window.Cypress) {
     // API CALL
     const res = await Characters.getCharacterByName({
       name: key,
@@ -33,5 +36,6 @@ export class Response {
         })
         : [],
     });
+    // }
   }
 }

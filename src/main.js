@@ -20,9 +20,11 @@ Vue.use(VueMq, {
   },
 });
 
-new Vue({
+const app = new Vue({
   router,
   store,
   i18n,
   render: (h) => h(App),
 }).$mount('#app');
+
+(window.Cypress) ? window.app = app : null;

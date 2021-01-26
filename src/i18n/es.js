@@ -7,6 +7,7 @@ export default {
   },
 
   inputs: {
+    title: 'Encuentra profesionales de confianza',
     placeholder: 'Qué necesitas...',
   },
 

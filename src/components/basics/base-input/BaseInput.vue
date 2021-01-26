@@ -11,6 +11,7 @@
       :for="id"
     >
       <input
+        data-cy="input"
         class="base-input__field"
         :id="id"
         :type="type"

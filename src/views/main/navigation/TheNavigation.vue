@@ -55,7 +55,7 @@
             >
               <!-- TITLE -->
               <template #title>
-                Encuentra profesionales de confianza
+                {{ $t(`message.inputs.title`) }}
               </template>
               <!-- /// -->
 
