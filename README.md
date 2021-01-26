@@ -1,4 +1,12 @@
 # challenge-habitissimo-live-search
+## Technical Stack
+
+|               | Nombre     | Versión |
+| ------------- | ---------- | ------- |
+| **Lenguaje**  | javascript | es6     |
+| **Framework** | vuejs      | 2.6.12  |
+| **Packages**  | vuex       | 3.4.0   |
+|               | vue-i18n   | 8.17.4  |
 
 ## Project setup
 ```
