@@ -20,12 +20,10 @@
             <router-link
               :to="{ name: 'start' }"
             >
-              <figure class="the-navigation__logo">
-                <img
-                  src="@/assets/images/elements/logo.webp"
-                  :alt="$t(`message.company`)"
-                >
-              </figure>
+              <picture class="the-navigation__logo">
+                <source srcset="@/assets/images/elements/logo.webp" type="image/webp">
+                <img src="@/assets/images/elements/logo.png">
+              </picture>
             </router-link>
           </h1>
         </li>
@@ -47,7 +45,7 @@
             <BaseInput
               id="live-search"
               :placeholder="$t(`message.inputs.placeholder`)"
-              v-model.trim="form.search"
+              v-model="form.search"
               @input="startSearch"
               @focus="inputFocus"
               @blur="setFocus"
@@ -279,9 +277,9 @@ export default {
       });
 
       // START SEARCH
-      // IF KEY LENGHT > 3
+      // IF KEY LENGHT > 2
       // AND 1SEC OF DEBOUNCE
-      if (size > 3) {
+      if (size > this.$constants.MIN_DIGIT) {
         // START LOADING ICON
         this.changeSearchLoading({ value: true });
 

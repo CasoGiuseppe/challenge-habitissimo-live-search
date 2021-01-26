@@ -24,6 +24,11 @@ const routes = [
       footer: () => import(/* webpackChunkName: "MainFooter" */ '@/views/main/footer/TheFooter'),
     },
   },
+
+  {
+    path: '*',
+    redirect: { name: 'start' },
+  },
 ];
 
 const router = new VueRouter({
@@ -38,5 +43,13 @@ VueRouter.prototype.push = function push(location, onResolve, onReject) {
   if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject);
   return originalPush.call(this, location).catch((err) => err);
 };
+
+router.beforeEach((to, from, next) => {
+  if (!from.name) {
+    to.name !== 'start' ? next({ name: 'start' }) : next();
+  } else {
+    next();
+  }
+});
 
 export default router;

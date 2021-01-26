@@ -1,4 +1,6 @@
 export const constants = {
+  MIN_DIGIT: 2,
+
   DETAILS: [
     {
       label: 'Gender',
