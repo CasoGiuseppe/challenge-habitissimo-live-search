@@ -8,6 +8,8 @@
 | **Packages**  | vuex       | 3.4.0   |
 |               | vue-i18n   | 8.17.4  |
 
+## IMPORTANT
+Rename .env.local.copy in .env.local 
 ## Browser testing
 ```
 Chrome v: 87.0
